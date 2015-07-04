@@ -1,0 +1,37 @@
+#エレベーターに使うことのできるブロックの登録です - BLOCK_NAME:<距離> のように入力して下さい
+elevator:
+ - REDSTONE_BLOCK:8
+ - LAPIS_BLOCK:16
+ - IRON_BLOCK:32
+ - EMERALD_BLOCK:64
+ - GOLD_BLOCK:128
+ - DIAMOND_BLOCK:256
+
+#LoginMessageの設定です
+LoginMessage:
+
+#サーバーに入った時に表示されるメッセージを表示します
+ LoginMessage: "&e<player>様がログインしました"
+
+#初めてサーバーにログインした時に表示する文字を設定します
+ FirstLogin:
+  - "&eThanks FirstLogin &r<player>&e!"
+  - "&eWelcome to HonobonoServer!"
+
+ #入った時のメッセージの後に表示できるメッセージの設定をします
+ Login:
+  - Hello! Honobonoserver!
+  - Test1!
+  - kennzoubaka!
+
+ #サーバーを出た時に表示されるメッセージを表示します
+ LogoutMessage: "&e<player>様がログアウトしました"
+
+#サーバーの説明欄をランダムで変更します 日本語は設定できません ご注意ください
+Motd:
+ - "&bTest1!"
+ - Test2!
+ - Test3!
+
+#swpで設定した地点がここに書きこまれます - <wp-name>,<world>,<x>,<y>,<z> のように書くと追加できます
+wp:

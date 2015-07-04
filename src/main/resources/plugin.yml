@@ -1,0 +1,105 @@
+name: HN-Core
+version: 1.0.0
+main: so.wktk.honobonoserver.hncore.HNCore
+
+commands:
+   hnconfig:
+      description: This is a change config command.
+      usage: /<command> <config_directory> <value>
+      permission: hncore.config
+      permission-message: Unknown command. Type "/help" for help.
+   hnreload:
+      description: This is a reload config command.
+      usage: /<command>
+      permission: hncore.reload
+      permission-message: Unknown command. Type "/help" for help.
+   hnget:
+      description: This is a admin command
+      usage: /<command> <ItemID> <meta>
+      permission: hncore.get
+      permission-message: Unknown command. Type "/help" for help.
+   hntp:
+      description: This is a admin command
+      usage: /<command> <playername> or /<command> <location-X> <location-Y> <location-Z> (<location-World>)
+      permission: hncore.hntp
+      permission-message: Unknown command. Type "/help" for help.
+   show:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.show
+      permission-message: Unknown command. Type "/help" for help.
+   hide:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.hide
+      permission-message: Unknown command. Type "/help" for help.
+   mute:
+      description: This is a admin command
+      usage: /<command> <player>
+      permission: hncore.mute
+      permission-message: Unknown command. Type "/help" for help.
+   unmute:
+      description: This is a admin command
+      usage: /<command> <player>
+      permission: hncore.unmute
+      permission-message: Unknown command. Type "/help" for help.
+   mutelist:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.mutelist
+      permission-message: Unknown command. Type "/help" for help.
+   a:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.adminchat
+      permission-message: Unknown command. Type "/help" for help.
+   ir:
+      description: This is a admin command
+      usage: /<command> <range>
+      permission: hncore.itemremove
+      permission-message: Unknown command. Type "/help" for help.
+   al:
+      description: This is a admin command
+      usage: /<command> <range>
+      permission: hncore.allremove
+      permission-message: Unknown command. Type "/help" for help.
+   f:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.f
+      permission-message: Unknown command. Type "/help" for help.
+   l:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.l
+      permission-message: Unknown command. Type "/help" for help.
+   freeze:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.freeze
+      permission-message: Unknown command. Type "/help" for help.
+   unfreeze:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.unfreeze
+      permission-message: Unknown command. Type "/help" for help.
+   swp:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.setwp
+      permission-message: Unknown command. Type "/help" for help.
+   twp:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.tpwp
+      permission-message: Unknown command. Type "/help" for help.
+   lwp:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.listwp
+      permission-message: Unknown command. Type "/help" for help.
+   home:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.home
+      permission-message: Unknown command. Type "/help" for help.
