@@ -24,19 +24,21 @@ public class Train {
 
 	private static Plugin instance = HNCore.getInstance();
 
+	private static double x;
+	private static double z;
 	/**
 	 * MineCartが看板の上を通り、かつなんの看板か判定します。
 	 * @param loc Cartの座標を入力します。
 	 * @return
 	 */
 	public static Map<String,Location> isTrain(Location loc) {
-		if (!((loc.getX() % 1.0) >= 0.48 && (loc.getZ() % 1.0) >= 0.48)) { return null; }
-		if (!((loc.getX() % 1.0) <= 0.75 && (loc.getZ() % 1.0) <= 0.75)) { return null; }
+		if(loc.getBlockX() == x && loc.getBlockZ() == z) { return null; }
+		x = loc.getBlockX(); z = loc.getBlockZ();
 		loc.subtract(0, 1, 0);
 		Location sign = nearBlock(loc,Material.WALL_SIGN);
 		if (sign == null) { return null; }
 		Sign signs = (Sign) sign.getBlock().getState();
-		if(!(signs.getLine(0).equalsIgnoreCase("[HNTrain]"))) { return null; }
+		if(!(signs.getLine(0).equalsIgnoreCase("[HNTrain]") || signs.getLine(0).equalsIgnoreCase("[HN-Train]"))) { return null; }
 		Map<String,Location> sl = new HashMap<String, Location>();
 		switch (signs.getLine(1).toLowerCase()) {
 		case "station":
@@ -44,9 +46,6 @@ public class Train {
 			return sl;
 		case "destroy":
 			sl.put("Destroy", sign);
-			return sl;
-		case "transfer":
-			sl.put("Transfer", sign);
 			return sl;
 		}
 		return null;
@@ -263,6 +262,11 @@ public class Train {
 		if (!(Elist.isEmpty()))  { spawnTrain(Facing,loc,Elist); }
 	}
 	public static void Destroy(Entity cart) {
-		cart.remove();
+		 new BukkitRunnable() {
+			 @Override
+			 public void run() {
+				 cart.remove();
+			 }
+		 }.runTaskLater(instance, 5);
 	}
 }
