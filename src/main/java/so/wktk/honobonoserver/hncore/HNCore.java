@@ -15,8 +15,6 @@ static Plugin instance;
 		getCommand("hnconfig").setExecutor(new hnconfig());
 		getCommand("hnreload").setExecutor(new hnreload());
 		getCommand("hnget").setExecutor(new hnget());
-		getCommand("f").setExecutor(new kennzou());
-		getCommand("l").setExecutor(new kennzou());
 		getCommand("hntp").setExecutor(new hntp());
 		getCommand("show").setExecutor(new show_hide());
 		getCommand("hide").setExecutor(new show_hide());
@@ -37,10 +35,10 @@ static Plugin instance;
 		getServer().getPluginManager().registerEvents(new elevator(), this);
 		getServer().getPluginManager().registerEvents(new LoginMessage(), this);
 		getServer().getPluginManager().registerEvents(new ChangeMotd(), this);
-		getServer().getPluginManager().registerEvents(new mute(), this);
 		getServer().getPluginManager().registerEvents(new adminchat(), this);
 		getServer().getPluginManager().registerEvents(new sign(), this);
 		getServer().getPluginManager().registerEvents(new freeze(), this);
+		getServer().getPluginManager().registerEvents(new Chat(), this);
 	}
 
 	@Override

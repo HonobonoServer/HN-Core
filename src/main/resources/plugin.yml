@@ -63,16 +63,6 @@ commands:
       usage: /<command> <range>
       permission: hncore.allremove
       permission-message: Unknown command. Type "/help" for help.
-   f:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.f
-      permission-message: Unknown command. Type "/help" for help.
-   l:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.l
-      permission-message: Unknown command. Type "/help" for help.
    freeze:
       description: This is a admin command
       usage: /<command>

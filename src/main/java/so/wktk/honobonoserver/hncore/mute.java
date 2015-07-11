@@ -3,14 +3,11 @@ package so.wktk.honobonoserver.hncore;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
 
 import so.wktk.honobonoserver.hncore.util.sendPacket;
@@ -46,17 +43,7 @@ public class mute implements Listener, CommandExecutor{
 		}
 	}
 
-	@EventHandler
-	public void Mute(AsyncPlayerChatEvent event) {
-		for (Player key : muters.keySet()) {
-			if(event.getPlayer() == key) {
-				for (Player player : Bukkit.getOnlinePlayers()) {
-					if(player.hasPermission("hncore.mute.tell")){
-						player.sendMessage("<" + key.getName() + ">" + event.getMessage().toLowerCase());
-					}
-				}
-				event.setCancelled(true);
-			}
-		}
+	public static Map<Player, Player> getmuter() {
+		return muters;
 	}
 }

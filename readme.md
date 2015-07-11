@@ -67,12 +67,6 @@ ir al
 	command: /ir <range> , /al <range>
 	説明: <range>分の範囲にいるItem,すべてのエンティティを削除します
 
-f l
--
-	permission: とある人以外使わないので省略
-	command: とある人以外使わないので省略
-	説明: とある人以外使わないので省略
-
 freeze unfreeze
 -
 	permission: hncore.freeze , hncore.unfreeze
