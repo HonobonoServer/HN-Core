@@ -41,8 +41,8 @@ public class Chat implements Listener{
 		msg = msg.replaceAll("(\"[^\"]*\")", "\t$1\t");
 		List<String> lmsg = Arrays.asList(msg.split("\t"));
 		StringBuilder sb = new StringBuilder();
-		for(int i =0; lmsg.size() >= i; i++) {
-			sb.append(Other.toJP(lmsg.get(i), katakana));
+		for(String m : lmsg) {
+			sb.append(Other.toJP(m, katakana));
 		}
 		event.setMessage(sb.toString());
 	}
