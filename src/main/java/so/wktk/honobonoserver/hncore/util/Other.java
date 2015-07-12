@@ -134,13 +134,14 @@ public class Other {
 	}
 
 	/**
-	 * ローマ字をひらがなに変換します
-	 * @param Roman もととなるローマ字です。
-	 * @return ひらがなの文字列を返します。
+	 * ローマ字を日本語にします。
+	 * @param Roman もとのローマ字列
+	 * @param katakana カタカナにする場合にはtrue
+	 * @return 変換後の文字列
 	 */
 	public static String toJP(String Roman ,boolean katakana) {
 		String str = Roman.toLowerCase();
-		if(str.startsWith("\"")) { return str; }
+		if(str.startsWith("\"") && str.endsWith("\"")) { return str.substring(1, str.length() -1); }
 		str = str.replaceAll("ltu","っ");
 		str = str.replaceAll("xtu","っ");
 		str = str.replaceAll("nn","ん");
@@ -622,8 +623,8 @@ public class Other {
 		str = str.replaceAll("-","ー");
 		str = str.replaceAll(",","、");
 		str = str.replaceAll("~","～");
-		str = str.replaceAll("[","「");
-		str = str.replaceAll("]","」");
+		//str = str.replaceAll("[","「");
+		//str = str.replaceAll("]","」");
 
 		str = str.replaceAll("n","ん");
 
