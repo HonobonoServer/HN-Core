@@ -1,15 +1,6 @@
 package so.wktk.honobonoserver.hncore;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -18,22 +9,9 @@ import so.wktk.honobonoserver.hncore.util.announceEvent;
 
 public class HNCore extends JavaPlugin {
 	static Plugin instance;
-	static final private Charset CONFIG_CHAREST=StandardCharsets.UTF_8;
-	static FileConfiguration conf;
 
 	@Override
 	public void onEnable() {
-		//ConfigをUTF8で読み込む
-		saveDefaultConfig();
-		String confFilePath=getDataFolder() + File.separator + "config.yml";
-		try(
-			Reader reader=new InputStreamReader(new FileInputStream(confFilePath),CONFIG_CHAREST)){
-			conf=new YamlConfiguration();
-			conf.load(reader);
-		}catch(Exception e){
-			System.out.println(e);
-			onDisable();
-		}
 		//準備
 		instance = this;
 		getLogger().info("HN-Coreを起動しました");
@@ -81,11 +59,6 @@ public class HNCore extends JavaPlugin {
 	public static Plugin getInstance() {
 		return instance;
 	}
-
-	public static FileConfiguration getConf() {
-		return conf;
-	}
-
 
 	public void announce() {
 		announceEvent event = new announceEvent();
