@@ -31,7 +31,10 @@ public class wp implements CommandExecutor{
 				List<String> l = instance.getConfig().getStringList("wp");
 				for(String lo : l) {
 					if(lo.startsWith(args[0])) {
-						player.teleport(StoL(lo));
+						Location loc = StoL(lo);
+						loc.setPitch(player.getLocation().getPitch());
+						loc.setYaw(player.getLocation().getYaw());
+						player.teleport(loc);
 					}
 				}
 			return true;
