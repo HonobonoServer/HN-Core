@@ -55,6 +55,7 @@ public class HNCore extends JavaPlugin {
 		return instance;
 	}
 
+
 	/*
 	public void announce() {
 		announceEvent event = new announceEvent();
