@@ -41,7 +41,7 @@ public class Chat implements Listener{
 			katakana = true;
 		}
 		sb.append("<");
-		sb.append(Other.TrimS(PermissionsEx.getUser(event.getPlayer()).getPrefix() + "&r", null));
+		sb.append(Other.color(PermissionsEx.getUser(event.getPlayer()).getPrefix() + "&r", null));
 		sb.append(event.getPlayer().getDisplayName());
 		sb.append("> ");
 		sb.append(msg);

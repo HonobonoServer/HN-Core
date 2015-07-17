@@ -1,4 +1,4 @@
-#エレベーターに使うことのできるブロックの登録です - BLOCK_NAME:<距離> のように入力して下さい
+#�G���x�[�^�[�Ɏg�����Ƃ̂ł���u���b�N�̓o�^�ł� - BLOCK_NAME:<����> �̂悤�ɓ��͂��ĉ�����
 elevator:
  - REDSTONE_BLOCK:8
  - LAPIS_BLOCK:16
@@ -7,52 +7,52 @@ elevator:
  - GOLD_BLOCK:128
  - DIAMOND_BLOCK:256
 
-#LoginMessageの設定です
+#LoginMessage�̐ݒ�ł�
 LoginMessage:
 
-#サーバーに入った時に表示されるメッセージを表示します
- LoginMessage: "&e<player>様がログインしました"
+#�T�[�o�[�ɓ��������ɕ\������郁�b�Z�[�W��\�����܂�
+ LoginMessage: "&e<player>�l�����O�C�����܂���"
 
-#初めてサーバーにログインした時に表示する文字を設定します
+#���߂ăT�[�o�[�Ƀ��O�C���������ɕ\�����镶����ݒ肵�܂�
  FirstLogin:
   - "&eThanks FirstLogin &r<player>&e!"
   - "&eWelcome to HonobonoServer!"
 
- #入った時のメッセージの後に表示できるメッセージの設定をします
+ #���������̃��b�Z�[�W�̌�ɕ\���ł��郁�b�Z�[�W�̐ݒ�����܂�
  Login:
   - Hello! Honobonoserver!
   - Test1!
   - kennzoubaka!
 
- #サーバーを出た時に表示されるメッセージを表示します
- LogoutMessage: "&e<player>様がログアウトしました"
+ #�T�[�o�[���o�����ɕ\������郁�b�Z�[�W��\�����܂�
+ LogoutMessage: "&e<player>�l�����O�A�E�g���܂���"
 
-#サーバーの説明欄をランダムで変更します 日本語は設定できません ご注意ください
+#�T�[�o�[�̐������������_���ŕύX���܂�
 Motd:
  - "&bTest1!"
- - Test2!
+ - �e�X�g2!
  - Test3!
 
-#swpで設定した地点がここに書きこまれます - <wp-name>,<world>,<x>,<y>,<z> のように書くと追加できます
+#swp�Őݒ肵���n�_�������ɏ������܂�܂� - <wp-name>,<world>,<x>,<y>,<z> �̂悤�ɏ����ƒǉ��ł��܂�
 wp:
 
-#アナウンスの設定です
+#�A�i�E���X�̐ݒ�ł�
 announcement:
   random: false
   prefix: "&d[Announcement]&r "
-  interval: 10
+  interval: 100
   messages:
-  - "サーバー最新情報・アップデート情報はHonobonoServerWikiをご確認ください。"
-  - "所有者の判別がつかない建築物や、利用規約に違反している建築物は予告なしに撤去されます。"
-  - "鉱石、石、土等の採掘は資源ワールドで行いましょう。"
-  - "ほのぼのサーバーWIKIは常に更新されます、定期的にご確認ください。"
-  - "新規プレイヤーへのアイテム配布はご遠慮ください。(食料を除く。)"
-  - "拠点.家等はメインワールドへ空中へ建築する場合は下にフェンス等で囲ってわかるように。"
-  - "一か月ログインしていないプレイヤーの家は撤去される可能性があります"
-  - "住居区は一人の為のスペース ではありません。他人が利用することも考えましょう。"
-  - "都市部での建築において、綺麗な建物だと判断された場合、報酬が与えられることがあります。"
-  - "都市部では建築規約を守りま しょう。"
-  - "都市部の土地を独り占めするのはやめましょう。"
-  - "住居区にて求人所を開放しました、個人間の仕事の取引な ど、是非ご利用ください！"
-  - "ほのぼのサーバオリジナルレシピ公開中！詳細はほのぼのサーバWIKIをご覧ください！ &e>>http://www54.atwiki.jp/riha4590/ "
-  - "資源の採集は資源ワールドで。ご協力をお願いします。"
+  - "�T�[�o�[�ŐV���E�A�b�v�f�[�g����HonobonoServerWiki�����m�F���������B"
+  - "���L�҂̔��ʂ����Ȃ����z����A���p�K��Ɉᔽ���Ă��錚�z���͗\���Ȃ��ɓP������܂��B"
+  - "�z�΁A�΁A�y���̍̌@�͎������[���h�ōs���܂��傤�B"
+  - "�ق̂ڂ̃T�[�o�[WIKI�͏�ɍX�V����܂��A����I�ɂ��m�F���������B"
+  - "�V�K�v���C���[�ւ̃A�C�e���z�z�͂��������������B(�H���������B)"
+  - "���_.�Ɠ��̓��C�����[���h�֋󒆂֌��z����ꍇ�͉��Ƀt�F���X���ň͂��Ă킩��悤�ɁB"
+  - "�ꂩ�����O�C�����Ă��Ȃ��v���C���[�̉Ƃ͓P�������\��������܂�"
+  - "�Z����͈�l�ׂ̈̃X�y�[�X �ł͂���܂���B���l�����p���邱�Ƃ��l���܂��傤�B"
+  - "�s�s���ł̌��z�ɂ����āA�Y��Ȍ������Ɣ��f���ꂽ�ꍇ�A��V���^�����邱�Ƃ�����܂��B"
+  - "�s�s���ł͌��z�K������� ���傤�B"
+  - "�s�s���̓y�n��Ƃ��߂���̂͂�߂܂��傤�B"
+  - "�Z����ɂċ��l�����J�����܂����A�l�Ԃ̎d���̎���� �ǁA���񂲗��p���������I"
+  - "�ق̂ڂ̃T�[�o�I���W�i�����V�s���J���I�ڍׂ͂ق̂ڂ̃T�[�oWIKI���������������I &e>>http://www54.atwiki.jp/riha4590/ "
+  - "�����̍̏W�͎������[���h�ŁB�����͂����肢���܂��B"

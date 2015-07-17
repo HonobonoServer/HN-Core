@@ -18,7 +18,7 @@ public class ChangeMotd implements Listener{
 		List<String> Motd = instance.getConfig().getStringList("Motd");
 		String motd = Motd.get(new Random().nextInt(Motd.size()));
 		if (!(motd.length() == 0)) {
-			motd = Other.TrimS(motd, null);
+			motd = Other.color(motd, null);
 			event.setMotd(motd);
 		}
 	}

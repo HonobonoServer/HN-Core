@@ -23,18 +23,18 @@ public class LoginMessage implements Listener{
 		event.setJoinMessage("");
 
 		String JoinMessage = instance.getConfig().getString("LoginMessage.LoginMessage");
-			Bukkit.broadcastMessage(Other.TrimS(JoinMessage, player));
+			Bukkit.broadcastMessage(Other.color(JoinMessage, player));
 		if(!(player.hasPlayedBefore())) {
 			List<String> First = instance.getConfig().getStringList("LoginMessage.FirstLogin");
 			for(String first : First) {
-				first = Other.TrimS(first, player);
+				first = Other.color(first, player);
 				Bukkit.broadcastMessage(first);
 			}
 		}
 
 		List<String> LoginMessage = instance.getConfig().getStringList("LoginMessage.Login");
 		for ( String m : LoginMessage) {
-			player.sendMessage(Other.TrimS(m, player));
+			player.sendMessage(Other.color(m, player));
 		}
 		//hideコマンド使用者を適応
 		Map<Player, Player> hiders = show_hide.gethider();
@@ -48,6 +48,6 @@ public class LoginMessage implements Listener{
 	public void LogoutMsg(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		String LogoutMessage = instance.getConfig().getString("LoginMessage.LogoutMessage");
-		event.setQuitMessage(Other.TrimS(LogoutMessage, player));
+		event.setQuitMessage(Other.color(LogoutMessage, player));
 	}
 }

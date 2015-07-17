@@ -16,6 +16,7 @@ import so.wktk.honobonoserver.hncore.util.announceEvent;
 
 public class announce implements Listener, CommandExecutor {
 	private Plugin instance = HNCore.getInstance();
+	//private FileConfiguration conf = HNCore.getConf();
 	private int count = 0;
 
 	@EventHandler
@@ -29,7 +30,7 @@ public class announce implements Listener, CommandExecutor {
 				count = 0;
 			}
 		}
-		String msg = Other.TrimS(instance.getConfig().getString("announcement.prefix") + messages.get(count),null);
+		String msg = Other.color(instance.getConfig().getString("announcement.prefix") + messages.get(count),null);
 		Bukkit.broadcastMessage(msg);
 	}
 
@@ -39,7 +40,7 @@ public class announce implements Listener, CommandExecutor {
 		List<String> messages = instance.getConfig().getStringList("announcement.messages");
 		if (args[0].equalsIgnoreCase("list")) {
 			for (int i = 0; messages.size() <= i; i++) {
-				sender.sendMessage(i + ": " + Other.TrimS(messages.get(i),null));
+				sender.sendMessage(i + ": " + Other.color(messages.get(i),null));
 			}
 			return true;
 		} else if (args[0].equalsIgnoreCase("add")) {

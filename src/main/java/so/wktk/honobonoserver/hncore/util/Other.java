@@ -3,7 +3,6 @@ package so.wktk.honobonoserver.hncore.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -65,37 +64,6 @@ public class Other {
 		}
 		text = text.replaceAll("&([0-9a-fk-or])", "§" + "$1");
 		return text;
-	}
-
-	/**
-	 * &(0-9a-fk-or)をBukkit向けに変更します。文字化けする場合はこちらを使用してください。
-	 *
-	 * @param text
-	 *            置き換える文章を指定します。
-	 * @param player
-	 *            playerがあった場合、playerより名前を取得後置き換えます。
-	 * @return &(0-9a-fk-or) と playerを置き換えたメッセージを返します。
-	 */
-	public static String TrimS(String text, Player player) {
-		text = UTF8(text);
-		text = color(text, player);
-		return text;
-	}
-
-	/**
-	 * UTF-8に変換します
-	 *
-	 * @param text
-	 *            もとの文章
-	 * @return UTF-8に変換した文字列を返します。
-	 */
-	public static String UTF8(String text) {
-		try {
-			String text1 = new String(text.getBytes(), "UTF-8");
-			return text1;
-		} catch (UnsupportedEncodingException e) {
-			return null;
-		}
 	}
 
 	/**
