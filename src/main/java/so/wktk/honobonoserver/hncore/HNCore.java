@@ -4,14 +4,17 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class HNCore extends JavaPlugin {
-static Plugin instance;
+	static Plugin instance;
+
 	@Override
 	public void onEnable() {
+		//準備
 		instance = this;
 		getLogger().info("HN-Coreを起動しました");
-		//config読み込み
+		//announce();
+		// config読み込み
 		this.saveDefaultConfig();
-		//コマンドの設定
+		// コマンドの設定
 		getCommand("hnconfig").setExecutor(new hnconfig());
 		getCommand("hnreload").setExecutor(new hnreload());
 		getCommand("hnget").setExecutor(new hnget());
@@ -30,7 +33,8 @@ static Plugin instance;
 		getCommand("twp").setExecutor(new wp());
 		getCommand("lwp").setExecutor(new wp());
 		getCommand("home").setExecutor(new home());
-		//Listener
+		//getCommand("hnannounce").setExecutor(new announce());
+		// Listener
 		getServer().getPluginManager().registerEvents(new blockreplace(), this);
 		getServer().getPluginManager().registerEvents(new elevator(), this);
 		getServer().getPluginManager().registerEvents(new LoginMessage(), this);
@@ -39,6 +43,7 @@ static Plugin instance;
 		getServer().getPluginManager().registerEvents(new sign(), this);
 		getServer().getPluginManager().registerEvents(new freeze(), this);
 		getServer().getPluginManager().registerEvents(new Chat(), this);
+		//getServer().getPluginManager().registerEvents(new announce(), this);
 	}
 
 	@Override
@@ -49,4 +54,18 @@ static Plugin instance;
 	public static Plugin getInstance() {
 		return instance;
 	}
+
+	/*
+	public void announce() {
+		announceEvent event = new announceEvent();
+		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+		scheduler.scheduleSyncDelayedTask(this, new Runnable() {
+			@Override
+			public void run() {
+				Bukkit.getServer().getPluginManager().callEvent(event);
+				announce();
+			}
+		}, instance.getConfig().getInt("announcement.interval") *20);
+	}
+	*/
 }

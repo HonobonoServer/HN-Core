@@ -1,6 +1,7 @@
 package so.wktk.honobonoserver.hncore;
 
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,11 +14,11 @@ public class ChangeMotd implements Listener{
 	private Plugin instance = HNCore.getInstance();
 
 	@EventHandler(ignoreCancelled = true)
-	public void onServerListPing(final ServerListPingEvent event){
+	public void onServerListPing(ServerListPingEvent event){
 		List<String> Motd = instance.getConfig().getStringList("Motd");
-		String motd = Motd.get(new java.util.Random().nextInt(Motd.size()));
+		String motd = Motd.get(new Random().nextInt(Motd.size()));
 		if (!(motd.length() == 0)) {
-			motd = Other.figuration(motd, null);
+			motd = Other.TrimS(motd, null);
 			event.setMotd(motd);
 		}
 	}

@@ -1,5 +1,6 @@
 name: HN-Core
 version: 1.0.0
+author: syu_chan_1005
 main: so.wktk.honobonoserver.hncore.HNCore
 
 commands:
@@ -92,4 +93,9 @@ commands:
       description: This is a admin command
       usage: /<command>
       permission: hncore.home
+      permission-message: Unknown command. Type "/help" for help.
+   hnannounce:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.hnannounce
       permission-message: Unknown command. Type "/help" for help.
