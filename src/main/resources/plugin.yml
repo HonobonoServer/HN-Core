@@ -39,16 +39,6 @@ commands:
       usage: /<command> <player>
       permission: hncore.mute
       permission-message: Unknown command. Type "/help" for help.
-   unmute:
-      description: This is a admin command
-      usage: /<command> <player>
-      permission: hncore.unmute
-      permission-message: Unknown command. Type "/help" for help.
-   mutelist:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.mutelist
-      permission-message: Unknown command. Type "/help" for help.
    a:
       description: This is a admin command
       usage: /<command>

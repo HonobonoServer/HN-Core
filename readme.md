@@ -4,8 +4,6 @@ This software is released under the MIT License, see LICENSE.md.
 
 このプラグインはHonobonoServer(hn-server.ddo.jp)用のpluginです。
 そのためソースはオープンソースとして管理しますがコンパイル後のjarファイルの二次配布は禁止とします。
-また要望がある場合にはZenhub(https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd?utm_source=chrome-ntp-icon)
-をchromeに導入しBoardよりissueに追加して下さい。
 
 コマンドについて
 

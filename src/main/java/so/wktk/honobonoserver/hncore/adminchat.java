@@ -31,25 +31,16 @@ public class adminchat implements Listener, CommandExecutor{
 				return true;
 			}
 		} else {
-			for (Player admin : admins.keySet()) {
-				for(String msg : args) {
-					admin.sendMessage(msg);
-				}
-			}
+			Bukkit.broadcast("<" + ((Player)sender).getDisplayName() + "> " + "§b" + args[0], "hncore.adminchat");
 			return true;
 		}
 	}
 
 	@EventHandler
-	public void Mute(AsyncPlayerChatEvent event) {
-		for (Player admin : admins.keySet()) {
-			if(event.getPlayer() == admin) {
-				for (Player player : Bukkit.getOnlinePlayers()) {
-					if(player.hasPermission("hncore.adminchat"))
-					player.sendMessage("§a<" + admin.getName() + ">" + event.getMessage().toLowerCase());
-				}
-				event.setCancelled(true);
-			}
+	public void AdminChat(AsyncPlayerChatEvent event) {
+		if(admins.containsKey(event.getPlayer())) {
+			Bukkit.broadcast("<" + event.getPlayer().getDisplayName() + "> " + "§b" + event.getMessage(), "hncore.adminchat");
+			event.setCancelled(true);
 		}
 	}
 }

@@ -26,8 +26,6 @@ public class HNCore extends JavaPlugin {
 		getCommand("show").setExecutor(new show_hide());
 		getCommand("hide").setExecutor(new show_hide());
 		getCommand("mute").setExecutor(new mute());
-		getCommand("unmute").setExecutor(new mute());
-		getCommand("mutelist").setExecutor(new mute());
 		getCommand("a").setExecutor(new adminchat());
 		getCommand("ir").setExecutor(new itemremove());
 		getCommand("al").setExecutor(new itemremove());
@@ -49,6 +47,7 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new freeze(), this);
 		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new announce(), this);
+		getServer().getPluginManager().registerEvents(new ShowCommand(), this);
 	}
 
 	@Override

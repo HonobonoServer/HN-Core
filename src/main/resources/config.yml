@@ -33,6 +33,11 @@ Motd:
  - テスト2!
  - Test3!
 
+#ShowCommandの設定です
+ShowCommand:
+ prefix: "&b[SC]&r"
+ format: "<prefix><player>:<command>"
+
 #swpで設定した地点がここに書きこまれます - <wp-name>,<world>,<x>,<y>,<z> のように書くと追加できます
 wp:
 

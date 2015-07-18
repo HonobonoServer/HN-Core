@@ -60,7 +60,7 @@ public class Other {
 	 */
 	public static String color(String text, Player player) {
 		if (player != null) {
-			text = text.replaceAll("<player>", player.getDisplayName());
+			text = text.replaceAll("<player>", player.getName());
 		}
 		text = text.replaceAll("&([0-9a-fk-or])", "§" + "$1");
 		return text;
