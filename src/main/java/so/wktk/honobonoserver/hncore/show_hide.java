@@ -4,12 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import so.wktk.honobonoserver.hncore.util.sendPacket;
 
@@ -29,8 +27,6 @@ public class show_hide implements CommandExecutor {
 			}
 			sendPacket.sendPlayer((Player) sender, sendPacket.setActionBar("§aShow!"));
 			hiders.remove(player);
-			ItemStack myitem = new ItemStack(Material.ICE , -2147483647);
-			((Player)sender).getInventory().addItem(myitem);
 			return true;
 		} else if(cmd.getName().equalsIgnoreCase("hide")){
 			Player player = (Player) sender;

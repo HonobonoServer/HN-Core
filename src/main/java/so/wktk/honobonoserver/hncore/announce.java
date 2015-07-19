@@ -38,27 +38,27 @@ public class announce implements Listener, CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (args.length == 0) { return false;}
 		List<String> messages = instance.getConfig().getStringList("announcement.messages");
-		if (args[0].equalsIgnoreCase("list")) {
-			for (int i = 0; messages.size() <= i; i++) {
-				sender.sendMessage(i + ": " + Other.color(messages.get(i),null));
+		if (args[0].equalsIgnoreCase("list")) {;
+			for(int i = 0; messages.size() > i;i++) {
+				sender.sendMessage(i + ":" + messages.get(i));
 			}
 			return true;
 		} else if (args[0].equalsIgnoreCase("add")) {
-			if (args.length != 2) {
-				return false;
+			StringBuilder msg = new StringBuilder();
+			for(int i = 1; args.length > i; i++) {
+				msg.append(args[i]);
 			}
-			messages.add(args[1]);
+			messages.add(msg.toString());
 			instance.getConfig().set("announcement.messages", messages);
 			instance.saveConfig();
+			sender.sendMessage("追加しました");
 			return true;
-		} else if (args[0].equalsIgnoreCase("edit")) {
-			if (args.length != 3) {
-				return false;
-			}
+		} else if (args[0].equalsIgnoreCase("delete") || args[0].equalsIgnoreCase("remove")) {
+			if(args.length != 2) { return false; }
 			messages.remove(Integer.valueOf(args[1]));
-			messages.add(args[2]);
 			instance.getConfig().set("announcement.messages", messages);
 			instance.saveConfig();
+			sender.sendMessage("削除しました");
 			return true;
 		}
 		return false;

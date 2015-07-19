@@ -38,7 +38,7 @@ ShowCommand:
  prefix: "&b[SC]&r"
  format: "<prefix><player>:<command>"
 
-#swpで設定した地点がここに書きこまれます - <wp-name>,<world>,<x>,<y>,<z> のように書くと追加できます
+#swpで設定した地点がここに書きこまれます - <wp-name>,<world>,<x>,<y>,<z>,<pitch>,<yaw> のように書くと追加できます
 wp:
 
 #アナウンスの設定です

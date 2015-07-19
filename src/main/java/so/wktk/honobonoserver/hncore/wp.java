@@ -19,9 +19,15 @@ public class wp implements CommandExecutor{
 			if(args.length == 1) {
 				List<String> l = instance.getConfig().getStringList("wp");
 				Player player = (Player) sender;
+				for(int i = 0; i < l.size(); i++) {
+					if(l.get(i).startsWith(args[0])) {
+						l.remove(i);
+					}
+				}
 				l.add(LtoS(player.getLocation(),args[0]));
 				instance.getConfig().set("wp", l);
 				instance.saveConfig();
+				sender.sendMessage("テレポートポイントをセットしました ポイント:" + args[0]);
 				return true;
 			}
 			return false;
@@ -32,8 +38,6 @@ public class wp implements CommandExecutor{
 				for(String lo : l) {
 					if(lo.startsWith(args[0])) {
 						Location loc = StoL(lo);
-						loc.setPitch(player.getLocation().getPitch());
-						loc.setYaw(player.getLocation().getYaw());
 						player.teleport(loc);
 					}
 				}
@@ -53,11 +57,11 @@ public class wp implements CommandExecutor{
 
 	public static Location StoL(String Location) {
 		String[] loc = Location.split(",");
-		double[] parsed = new double[3];
-		for (int i = 0; i < 3; i++) {
+		double[] parsed = new double[5];
+		for (int i = 0; i < 5; i++) {
 		    parsed[i] = Double.parseDouble(loc[i + 2]);
 		}
-		Location location = new Location (Bukkit.getWorld(loc[1]), parsed[0], parsed[1], parsed[2]);
+		Location location = new Location (Bukkit.getWorld(loc[1]), parsed[0], parsed[1], parsed[2], (float)parsed[3], (float)parsed[4]);
 		return location;
 	}
 
@@ -72,6 +76,10 @@ public class wp implements CommandExecutor{
 		sb.append((int)loc.getY());
 		sb.append(",");
 		sb.append((int)loc.getZ());
+		sb.append(",");
+		sb.append((int)loc.getPitch());
+		sb.append(",");
+		sb.append((int)loc.getYaw());
 		return sb.toString();
 	}
 }

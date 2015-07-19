@@ -68,7 +68,9 @@ public class Other {
 
 	/**
 	 * 文字列内に2Byte文字があるかどうか判定します
-	 * @param text 元の字列
+	 *
+	 * @param text
+	 *            元の字列
 	 * @return 全角:true 半角:flase
 	 */
 	public static boolean isZenkaku(String text) {
@@ -120,7 +122,7 @@ public class Other {
 	 *            カタカナにする場合にはtrue
 	 * @return 変換後の文字列
 	 */
-	public static String toJP(String Roman, boolean katakana) {
+	public static String toJP(String Roman, boolean katakana, boolean IME) {
 		String str = Roman.toLowerCase();
 		if (str.startsWith("\"") && str.endsWith("\"")) {
 			return str.substring(1, str.length() - 1);
