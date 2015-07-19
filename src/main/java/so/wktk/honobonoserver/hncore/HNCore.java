@@ -1,23 +1,28 @@
 package so.wktk.honobonoserver.hncore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import so.wktk.honobonoserver.hncore.util.Item;
 import so.wktk.honobonoserver.hncore.util.announceEvent;
+import so.wktk.honobonoserver.hncore.util.lang;
 
 public class HNCore extends JavaPlugin {
 	static Plugin instance;
 
 	@Override
 	public void onEnable() {
-		//準備
+		// 準備
 		instance = this;
 		getLogger().info("HN-Coreを起動しました");
 		announce();
 		// config読み込み
 		this.saveDefaultConfig();
+		lang.create();
 		// コマンドの設定
 		getCommand("hnconfig").setExecutor(new hnconfig());
 		getCommand("hnreload").setExecutor(new hnreload());
@@ -48,7 +53,12 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new announce(), this);
 		getServer().getPluginManager().registerEvents(new ShowCommand(), this);
+		getServer().getPluginManager().registerEvents(new Items(), this);
+
+		ShapedRecipe pocketcrafter = new ShapedRecipe(Item.PocketCrafter()).shape(new String[] { "*" }).setIngredient('*', Material.WORKBENCH);
+		this.getServer().addRecipe(pocketcrafter);
 	}
+
 
 	@Override
 	public void onDisable() {
@@ -68,6 +78,6 @@ public class HNCore extends JavaPlugin {
 				Bukkit.getServer().getPluginManager().callEvent(event);
 				announce();
 			}
-		}, instance.getConfig().getInt("announcement.interval") *20);
+		}, instance.getConfig().getInt("announcement.interval") * 20);
 	}
 }

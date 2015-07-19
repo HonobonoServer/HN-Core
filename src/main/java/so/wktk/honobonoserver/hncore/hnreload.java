@@ -10,6 +10,7 @@ import so.wktk.honobonoserver.hncore.util.sendPacket;
 
 public class hnreload implements CommandExecutor {
 	private Plugin instance = HNCore.getInstance();
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		instance.reloadConfig();

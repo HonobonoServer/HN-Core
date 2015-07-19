@@ -1,12 +1,16 @@
 package so.wktk.honobonoserver.hncore.util;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +20,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
 public class Other {
 
@@ -609,12 +616,23 @@ public class Other {
 		str = str.replaceAll(",", "、");
 		str = str.replaceAll("~", "～");
 
+		str = str.replaceAll("mjd", "マジで");
+		str = str.replaceAll("mj", "マジ");
+		str = str.replaceAll("dsyn", "でしょうね");
+		str = str.replaceAll("www", "草生えるw");
 		str = str.replaceAll("n", "ん");
 
 		if (katakana == true) {
 			str = toKata(str);
 		}
 
+		/*
+		if (IME == true) {
+			str = toIME(str);
+		}
+		*/
+
+		color(str,null);
 		return str;
 	}
 
@@ -636,6 +654,49 @@ public class Other {
 		return sb.toString();
 	}
 
+	/*
+	@SuppressWarnings("rawtypes")
+	public static String toIME(String kana) {
+		URL url;
+		try {
+			url = new URL("http://google.co.jp/transliterate?langpair=ja-Hira%7cja&text=" + kana);
+			URLConnection conn = url.openConnection();
+			InputStream in = conn.getInputStream();
+			Map<String,String> map = Json2Map(in);
+			if (map == null) { return null; }
+			Iterator entries = map.entrySet().iterator();
+			StringBuilder sb = new StringBuilder();
+			while(entries.hasNext()) {
+				Map.Entry entry = (Map.Entry)entries.next();
+				sb.append((String)entry.getValue());
+			}
+			return sb.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	*/
+
+	public static Map<String,String> Json2Map(InputStream googleIME) {
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(googleIME,"UTF-8"));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+			br.close();
+			String kana = sb.toString();
+			java.lang.reflect.Type mapType = new TypeToken<Map<String, String>>(){}.getType();
+			Gson gson = new Gson();
+			Map<String, String> map = gson.fromJson(kana, mapType);
+			return map;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	/**
 	 * Inventoryをファイルに保存します
 	 *

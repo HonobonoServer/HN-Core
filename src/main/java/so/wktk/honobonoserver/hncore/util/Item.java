@@ -21,4 +21,12 @@ public class Item {
 		myitem.setItemMeta(im);
 		return myitem;
 	}
+
+	public static ItemStack PocketCrafter() {
+		ItemStack myitem = new ItemStack(Material.STICK);
+		ItemMeta im = myitem.getItemMeta();
+		im.setDisplayName("§RPocket-Crafter");
+		myitem.setItemMeta(im);
+		return myitem;
+	}
 }
