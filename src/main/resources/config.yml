@@ -43,6 +43,7 @@ wp:
 
 #アナウンスの設定です
 announcement:
+  enable: false
   random: false
   prefix: "&d[Announcement]&r "
   interval: 100

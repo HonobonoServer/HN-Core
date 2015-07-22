@@ -21,11 +21,43 @@ public class Item {
 		myitem.setItemMeta(im);
 		return myitem;
 	}
-
+/*
 	public static ItemStack PocketCrafter() {
 		ItemStack myitem = new ItemStack(Material.STICK);
 		ItemMeta im = myitem.getItemMeta();
-		im.setDisplayName("§RPocket-Crafter");
+		im.setDisplayName("§R§BPocket-Crafter");
+		myitem.setItemMeta(im);
+		return myitem;
+	}
+
+	public static ItemStack PocketAnvil() {
+		ItemStack myitem = new ItemStack(Material.STICK);
+		ItemMeta im = myitem.getItemMeta();
+		im.setDisplayName("§R§BPocket-Anvil");
+		myitem.setItemMeta(im);
+		return myitem;
+	}
+
+	public static ItemStack PocketEnchanter() {
+		ItemStack myitem = new ItemStack(Material.STICK);
+		ItemMeta im = myitem.getItemMeta();
+		im.setDisplayName("§R§BPocket-Enchanter");
+		myitem.setItemMeta(im);
+		return myitem;
+	}
+
+	public static ItemStack PocketFurnace() {
+		ItemStack myitem = new ItemStack(Material.STICK);
+		ItemMeta im = myitem.getItemMeta();
+		im.setDisplayName("§R§BPocket-Furnace");
+		myitem.setItemMeta(im);
+		return myitem;
+	}
+	*/
+	public static ItemStack PortableChest() {
+		ItemStack myitem = new ItemStack(Material.STICK);
+		ItemMeta im = myitem.getItemMeta();
+		im.setDisplayName("§R§BPocket-Chest");
 		myitem.setItemMeta(im);
 		return myitem;
 	}

@@ -1,15 +1,11 @@
 package so.wktk.honobonoserver.hncore;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import so.wktk.honobonoserver.hncore.util.Item;
 import so.wktk.honobonoserver.hncore.util.announceEvent;
-import so.wktk.honobonoserver.hncore.util.lang;
 
 public class HNCore extends JavaPlugin {
 	static Plugin instance;
@@ -22,7 +18,14 @@ public class HNCore extends JavaPlugin {
 		announce();
 		// config読み込み
 		this.saveDefaultConfig();
-		lang.create();
+		/*
+		try {
+			new File(instance.getDataFolder(), "PortableChest.yml").createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		*/
+		//config.create("lang.yml");
 		// コマンドの設定
 		getCommand("hnconfig").setExecutor(new hnconfig());
 		getCommand("hnreload").setExecutor(new hnreload());
@@ -41,6 +44,7 @@ public class HNCore extends JavaPlugin {
 		getCommand("lwp").setExecutor(new wp());
 		getCommand("home").setExecutor(new home());
 		getCommand("hnannounce").setExecutor(new announce());
+		//getCommand("hnopen").setExecutor(new PortableItems());
 
 		// Listener
 		getServer().getPluginManager().registerEvents(new blockreplace(), this);
@@ -53,10 +57,20 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new announce(), this);
 		getServer().getPluginManager().registerEvents(new ShowCommand(), this);
-		getServer().getPluginManager().registerEvents(new Items(), this);
+		//getServer().getPluginManager().registerEvents(new PortableItems(), this);
 
+		/*
 		ShapedRecipe pocketcrafter = new ShapedRecipe(Item.PocketCrafter()).shape(new String[] { "*" }).setIngredient('*', Material.WORKBENCH);
 		this.getServer().addRecipe(pocketcrafter);
+		ShapedRecipe pocketanvil = new ShapedRecipe(Item.PocketAnvil()).shape(new String[] { "*" }).setIngredient('*', Material.ANVIL);
+		this.getServer().addRecipe(pocketanvil);
+		ShapedRecipe pocketenchanter = new ShapedRecipe(Item.PocketEnchanter()).shape(new String[] { "*" }).setIngredient('*', Material.ENCHANTMENT_TABLE);
+		this.getServer().addRecipe(pocketenchanter);
+		ShapedRecipe pocketfurnace = new ShapedRecipe(Item.PocketFurnace()).shape(new String[] { "*" }).setIngredient('*', Material.FURNACE);
+		this.getServer().addRecipe(pocketfurnace);
+		ShapedRecipe pocketchest = new ShapedRecipe(Item.PortableChest()).shape(new String[] { "*" }).setIngredient('*', Material.CHEST);
+		this.getServer().addRecipe(pocketchest);
+		*/
 	}
 
 

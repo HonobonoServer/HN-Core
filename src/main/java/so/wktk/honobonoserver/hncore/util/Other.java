@@ -6,11 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,11 +24,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import so.wktk.honobonoserver.hncore.HNCore;
+
 public class Other {
+	private static Plugin instance = HNCore.getInstance();
 
 	/**
 	 * 現在時間を日本時間で出力します
@@ -46,8 +54,9 @@ public class Other {
 	 * @param csv
 	 *            書き込む内容を指定します。
 	 */
-	public static void filewrite(File fl, String data) {
+	public static void filewrite(String filename, String data) {
 		try {
+			File fl = new File(instance.getDataFolder(), filename);
 			fl.createNewFile();
 			FileWriter fw = new FileWriter(fl, fl.exists());
 			fw.write(data);
@@ -129,7 +138,7 @@ public class Other {
 	 *            カタカナにする場合にはtrue
 	 * @return 変換後の文字列
 	 */
-	public static String toJP(String Roman, boolean katakana, boolean IME) {
+	public static String toJP(String Roman, boolean katakana, boolean ime) {
 		String str = Roman.toLowerCase();
 		if (str.startsWith("\"") && str.endsWith("\"")) {
 			return str.substring(1, str.length() - 1);
@@ -165,6 +174,12 @@ public class Other {
 		str = str.replaceAll("lu", "ぅ");
 		str = str.replaceAll("le", "ぇ");
 		str = str.replaceAll("lo", "ぉ");
+
+		str = str.replaceAll("kkya", "っきゃ");
+		str = str.replaceAll("kkyi", "っきぃ");
+		str = str.replaceAll("kkyu", "っきゅ");
+		str = str.replaceAll("kkye", "っきぇ");
+		str = str.replaceAll("kkyo", "っきょ");
 
 		str = str.replaceAll("kya", "きゃ");
 		str = str.replaceAll("kyi", "きぃ");
@@ -622,17 +637,16 @@ public class Other {
 		str = str.replaceAll("www", "草生えるw");
 		str = str.replaceAll("n", "ん");
 
+		color(str, null);
+
+		if (ime == true) {
+			str = toIME(str);
+			katakana = false;
+		}
+
 		if (katakana == true) {
 			str = toKata(str);
 		}
-
-		/*
-		if (IME == true) {
-			str = toIME(str);
-		}
-		*/
-
-		color(str,null);
 		return str;
 	}
 
@@ -654,49 +668,56 @@ public class Other {
 		return sb.toString();
 	}
 
-	/*
-	@SuppressWarnings("rawtypes")
+	/**
+	 * googleIMEを介して変換します
+	 *
+	 * @param kana
+	 *            ひらがな列
+	 * @return googleIME第一変換リスト
+	 * @author kssrさん
+	 */
 	public static String toIME(String kana) {
 		URL url;
 		try {
-			url = new URL("http://google.co.jp/transliterate?langpair=ja-Hira%7cja&text=" + kana);
+			url = new URL(
+					"http://google.co.jp/transliterate?langpair=ja-Hira%7cja&text=" + URLEncoder.encode(kana, "UTF8"));
 			URLConnection conn = url.openConnection();
 			InputStream in = conn.getInputStream();
-			Map<String,String> map = Json2Map(in);
-			if (map == null) { return null; }
-			Iterator entries = map.entrySet().iterator();
-			StringBuilder sb = new StringBuilder();
-			while(entries.hasNext()) {
-				Map.Entry entry = (Map.Entry)entries.next();
-				sb.append((String)entry.getValue());
-			}
-			return sb.toString();
+			return GoogleIME(in);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-	*/
 
-	public static Map<String,String> Json2Map(InputStream googleIME) {
+	@SuppressWarnings("rawtypes")
+	private static String GoogleIME(InputStream googleIME) {
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(googleIME,"UTF-8"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(googleIME, "UTF8"));
 			StringBuilder sb = new StringBuilder();
 			String line;
 			while ((line = br.readLine()) != null) {
 				sb.append(line);
 			}
 			br.close();
-			String kana = sb.toString();
-			java.lang.reflect.Type mapType = new TypeToken<Map<String, String>>(){}.getType();
 			Gson gson = new Gson();
-			Map<String, String> map = gson.fromJson(kana, mapType);
-			return map;
-		} catch(Exception e) {
+			Type listType = new TypeToken<List>() {
+			}.getType();
+			List posts = (List) gson.fromJson(sb.toString(), listType);
+			StringBuilder strb = new StringBuilder();
+
+			for (Object o : posts) {
+				List list = (List) o;
+				List koho = (List) list.get(1);
+				strb.append(koho.get(0).toString());
+			}
+			return strb.toString();
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
+
 	/**
 	 * Inventoryをファイルに保存します
 	 *
@@ -704,15 +725,14 @@ public class Other {
 	 *            保存するインベントリーです
 	 * @param PlayerName
 	 *            インベントリーの持ち主
-	 * @param path
-	 *            ファイルを保存する場所です(/plugins/PluginName/pathとなります)
 	 * @throws IOException
-	 *             ファイルに書き込めなかった場合
 	 */
-	public void save(Inventory inv, String PlayerName, String path) throws IOException {
-		YamlConfiguration c = new YamlConfiguration();
-		c.set(PlayerName, inv);
-		c.save(new File(path, PlayerName + ".yml"));
+	public static void saveInventory(Inventory inv, UUID UUID, File path) throws IOException {
+		path = new File(path, UUID.toString() + ".yml");
+		path.createNewFile();
+		YamlConfiguration c = YamlConfiguration.loadConfiguration(path);
+		c.set("contents", inv.getContents());
+		c.save(path);
 	}
 
 	/**
@@ -720,18 +740,21 @@ public class Other {
 	 *
 	 * @param PlayerName
 	 *            インベントリーの持ち主
-	 * @param path
-	 *            ファイルの保存している場所です(/plugins/PluginName/pathとなります)
 	 * @return 復元したInventoryです
-	 * @throws IOException
-	 *             ファイルを読み込めなかった場合
 	 */
 	@SuppressWarnings("unchecked")
-	public Inventory restore(String PlayerName, String path) throws IOException {
-		YamlConfiguration c = YamlConfiguration.loadConfiguration(new File(path, PlayerName + ".yml"));
-		ItemStack[] content = ((List<ItemStack>) c.get(PlayerName)).toArray(new ItemStack[0]);
-		Inventory inv = Bukkit.getServer().createInventory(null, InventoryType.CHEST);
-		inv.setContents(content);
-		return inv;
+	public static Inventory restoreInventory(UUID UUID, File path) {
+		try {
+			path = new File(path, UUID.toString() + ".yml");
+			YamlConfiguration c = YamlConfiguration.loadConfiguration(path);
+			List<ItemStack> items = (List<ItemStack>) c.get("contents");
+			ItemStack[] content = items.toArray(new ItemStack[0]);
+			Inventory inv = Bukkit.getServer().createInventory(null, InventoryType.CHEST, Bukkit.getPlayer(UUID).getName());
+			inv.setContents(content);
+			path.delete();
+			return inv;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

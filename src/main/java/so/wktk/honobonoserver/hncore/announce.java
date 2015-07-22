@@ -16,36 +16,41 @@ import so.wktk.honobonoserver.hncore.util.announceEvent;
 
 public class announce implements Listener, CommandExecutor {
 	private Plugin instance = HNCore.getInstance();
-	//private FileConfiguration conf = HNCore.getConf();
+	// private FileConfiguration conf = HNCore.getConf();
 	private int count = 0;
 
 	@EventHandler
 	public void Announce(announceEvent event) {
-		List<String> messages = instance.getConfig().getStringList("announcement.messages");
-		if (instance.getConfig().getBoolean("announcement.random") == true) {
-			count = new Random().nextInt(messages.size());
-		} else {
-			count++;
-			if(messages.size() < count) {
-				count = 0;
+		if (instance.getConfig().getBoolean("announcement.enable")) {
+			List<String> messages = instance.getConfig().getStringList("announcement.messages");
+			if (instance.getConfig().getBoolean("announcement.random") == true) {
+				count = new Random().nextInt(messages.size());
+			} else {
+				count++;
+				if (messages.size() <= count) {
+					count = 0;
+				}
 			}
+			String msg = Other.color(instance.getConfig().getString("announcement.prefix") + messages.get(count), null);
+			Bukkit.broadcastMessage(msg);
 		}
-		String msg = Other.color(instance.getConfig().getString("announcement.prefix") + messages.get(count),null);
-		Bukkit.broadcastMessage(msg);
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (args.length == 0) { return false;}
+		if (args.length == 0) {
+			return false;
+		}
 		List<String> messages = instance.getConfig().getStringList("announcement.messages");
-		if (args[0].equalsIgnoreCase("list")) {;
-			for(int i = 0; messages.size() > i;i++) {
+		if (args[0].equalsIgnoreCase("list")) {
+			;
+			for (int i = 0; messages.size() > i; i++) {
 				sender.sendMessage(i + ":" + messages.get(i));
 			}
 			return true;
 		} else if (args[0].equalsIgnoreCase("add")) {
 			StringBuilder msg = new StringBuilder();
-			for(int i = 1; args.length > i; i++) {
+			for (int i = 1; args.length > i; i++) {
 				msg.append(args[i]);
 			}
 			messages.add(msg.toString());
@@ -54,7 +59,9 @@ public class announce implements Listener, CommandExecutor {
 			sender.sendMessage("追加しました");
 			return true;
 		} else if (args[0].equalsIgnoreCase("delete") || args[0].equalsIgnoreCase("remove")) {
-			if(args.length != 2) { return false; }
+			if (args.length != 2) {
+				return false;
+			}
 			messages.remove(Integer.valueOf(args[1]));
 			instance.getConfig().set("announcement.messages", messages);
 			instance.saveConfig();

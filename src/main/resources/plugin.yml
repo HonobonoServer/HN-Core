@@ -89,3 +89,8 @@ commands:
       usage: /<command>
       permission: hncore.hnannounce
       permission-message: Unknown command. Type "/help" for help.
+   hnopen:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.open
+      permission-message: Unknown command. Type "/help" for help.

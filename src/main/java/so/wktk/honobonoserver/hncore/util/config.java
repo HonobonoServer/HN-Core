@@ -19,17 +19,17 @@ import org.bukkit.plugin.Plugin;
 
 import so.wktk.honobonoserver.hncore.HNCore;
 
-public class lang {
+public class config {
 	private static Plugin instance = HNCore.getInstance();
 
-	public static void create() {
-		File lang = new File(instance.getDataFolder(), "lang.yml");
-		if(lang.exists()) { return; }
+	public static void create(String filename) {
+		File config = new File(instance.getDataFolder(), filename + ".yml");
+		if(config.exists()) { return; }
 		InputStream is = null;
 		OutputStream os = null;
 		try {
-			is = instance.getResource("lang.yml");
-			os = new FileOutputStream(lang);
+			is = instance.getResource(filename);
+			os = new FileOutputStream(config);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -50,15 +50,15 @@ public class lang {
 		pw.close();
 	}
 
-	public static FileConfiguration getLang() {
-		FileConfiguration lang = new YamlConfiguration();
+	public static FileConfiguration get(String filename) {
+		FileConfiguration config = new YamlConfiguration();
 		Reader rd;
 		try {
-			rd = new InputStreamReader(instance.getResource("lang.yml"),"SJIS");
-			lang.load(rd);
+			rd = new InputStreamReader(instance.getResource(filename + ".yml"),"SJIS");
+			config.load(rd);
 		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
-		return lang;
+		return config;
 	}
 }
