@@ -1,7 +1,7 @@
 name: HN-Core
-version: 1.0.0
+version: beta-1.0.1
 author: syu_chan_1005
-main: so.wktk.honobonoserver.hncore.HNCore
+main: co.honobono.hncore.HNCore
 
 commands:
    hnconfig:
