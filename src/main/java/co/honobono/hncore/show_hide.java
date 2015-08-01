@@ -25,7 +25,7 @@ public class show_hide implements CommandExecutor {
 			for (Player all : Bukkit.getOnlinePlayers()) {
 				all.showPlayer(player);
 			}
-			sendPacket.sendPlayer((Player) sender, sendPacket.setActionBar("§aShow!"));
+			sendPacket.sendActionBar((Player) sender, "§aShow!");
 			hiders.remove(player);
 			return true;
 		} else if(cmd.getName().equalsIgnoreCase("hide")){
@@ -33,7 +33,7 @@ public class show_hide implements CommandExecutor {
 			for (Player all : Bukkit.getOnlinePlayers()) {
 				all.hidePlayer(player);
 			}
-			sendPacket.sendPlayer((Player) sender, sendPacket.setActionBar("§aHide!"));
+			sendPacket.sendActionBar((Player) sender, "§aHide!");
 			hiders.put(player,player);
 			return true;
 		} else {

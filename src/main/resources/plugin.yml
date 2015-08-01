@@ -64,20 +64,10 @@ commands:
       usage: /<command>
       permission: hncore.unfreeze
       permission-message: Unknown command. Type "/help" for help.
-   swp:
+   wp:
       description: This is a admin command
       usage: /<command>
-      permission: hncore.setwp
-      permission-message: Unknown command. Type "/help" for help.
-   twp:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.tpwp
-      permission-message: Unknown command. Type "/help" for help.
-   lwp:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.listwp
+      permission: hncore.wp
       permission-message: Unknown command. Type "/help" for help.
    home:
       description: This is a admin command
@@ -89,8 +79,8 @@ commands:
       usage: /<command>
       permission: hncore.hnannounce
       permission-message: Unknown command. Type "/help" for help.
-   hnopen:
+   hnlight:
       description: This is a admin command
       usage: /<command>
-      permission: hncore.open
+      permission: hncore.hnlight
       permission-message: Unknown command. Type "/help" for help.

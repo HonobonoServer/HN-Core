@@ -14,7 +14,8 @@ public class hnreload implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		instance.reloadConfig();
-		sendPacket.sendPlayer((Player) sender, sendPacket.setActionBar("§aReloadしました"));
+		Player player = (Player) sender;
+		sendPacket.sendActionBar(player, "§aReloadしました");
 		return true;
 	}
 }

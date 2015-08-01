@@ -20,14 +20,9 @@ public class sendPacket {
 		((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
 	}
 
-	/**
-	 * ActionBarPacketを作成します。(ActionBarとは乗り物などでのLSHIFT(ryのようなメッセージのことです
-	 * @param message 表示するMessageを指定します
-	 * @return sendPacketで使えるpacketを返します
-	 */
-	public static PacketPlayOutChat setActionBar(String message) {
+	public static void sendActionBar(Player player, String message) {
 		IChatBaseComponent message1 = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + message + "\"}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(message1, (byte)2);
-		return packet;
+		sendPlayer(player, packet);
 	}
 }

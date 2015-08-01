@@ -23,11 +23,11 @@ public class adminchat implements Listener, CommandExecutor{
 			Player player = (Player) sender;
 			if(admins.containsKey(player)) {
 				admins.remove(player);
-				sendPacket.sendPlayer(player, sendPacket.setActionBar("§aYour Leave AdminsChat"));
+				sendPacket.sendActionBar(player, "§aYour Leave AdminsChat");
 				return true;
 			} else {
 				admins.put(player, player);
-				sendPacket.sendPlayer(player, sendPacket.setActionBar("§aYour Join AdminsChat"));
+				sendPacket.sendActionBar(player, "§aYour Join AdminsChat");
 				return true;
 			}
 		} else {

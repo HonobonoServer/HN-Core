@@ -30,7 +30,7 @@ public class itemremove implements CommandExecutor {
 							entity.remove();
 						}
 					}
-					sendPacket.sendPlayer((Player) sender, sendPacket.setActionBar("§a削除しました"));
+					sendPacket.sendActionBar((Player) sender, "§a削除しました");
 					return true;
 				} catch(NumberFormatException e) {
 					return false;
@@ -50,7 +50,7 @@ public class itemremove implements CommandExecutor {
 						entity.remove();
 						}
 					}
-					sendPacket.sendPlayer((Player) sender, sendPacket.setActionBar("§a削除しました"));
+					sendPacket.sendActionBar((Player) sender, "§a削除しました");
 					return true;
 				} catch(NumberFormatException e) {
 					return false;

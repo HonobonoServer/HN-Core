@@ -33,11 +33,10 @@ public class HNCore extends JavaPlugin {
 		getCommand("al").setExecutor(new itemremove());
 		getCommand("freeze").setExecutor(new freeze());
 		getCommand("unfreeze").setExecutor(new freeze());
-		getCommand("swp").setExecutor(new wp());
-		getCommand("twp").setExecutor(new wp());
-		getCommand("lwp").setExecutor(new wp());
+		getCommand("wp").setExecutor(new wp());
 		getCommand("home").setExecutor(new home());
 		getCommand("hnannounce").setExecutor(new announce());
+		getCommand("hnlight").setExecutor(new light());
 
 		// Listener
 		getServer().getPluginManager().registerEvents(new blockreplace(), this);
@@ -50,6 +49,7 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new announce(), this);
 		getServer().getPluginManager().registerEvents(new ShowCommand(), this);
+		getServer().getPluginManager().registerEvents(new light(), this);
 	}
 
 

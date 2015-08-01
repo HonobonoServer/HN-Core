@@ -23,11 +23,11 @@ public class mute implements Listener, CommandExecutor{
 			Player player = Bukkit.getServer().getPlayer(args[0]);
 			if(muters.containsKey(player)) {
 				muters.remove(player);
-				sendPacket.sendPlayer(player, sendPacket.setActionBar("§aIt Leave Muter"));
+				sendPacket.sendActionBar(player, "§aIt Leave Muter");
 				return true;
 			} else {
 				muters.put(player, player);
-				sendPacket.sendPlayer(player, sendPacket.setActionBar("§aIt Join Muter"));
+				sendPacket.sendActionBar(player, "§aIt Join Muter");
 				return true;
 			}
 		}

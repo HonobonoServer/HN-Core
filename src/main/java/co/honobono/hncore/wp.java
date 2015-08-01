@@ -1,8 +1,8 @@
 package co.honobono.hncore;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,74 +12,59 @@ import org.bukkit.plugin.Plugin;
 
 public class wp implements CommandExecutor{
 	private Plugin instance = HNCore.getInstance();
+	@SuppressWarnings("unchecked")
+	private Map<String,Location> wplist = (Map<String, Location>) instance.getConfig().get("wp");
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		if(cmd.getName().equalsIgnoreCase("swp")){
-			if(args.length == 1) {
-				List<String> l = instance.getConfig().getStringList("wp");
-				Player player = (Player) sender;
-				for(int i = 0; i < l.size(); i++) {
-					if(l.get(i).startsWith(args[0])) {
-						l.remove(i);
-					}
-				}
-				l.add(LtoS(player.getLocation(),args[0]));
-				instance.getConfig().set("wp", l);
-				instance.saveConfig();
-				sender.sendMessage("テレポートポイントをセットしました ポイント:" + args[0]);
+		Player player = (Player) sender;
+		if(wplist == null) {
+			wplist = new HashMap<String, Location>();
+		}
+		if(args.length == 0) {
+			if(wplist.isEmpty()) {
+				player.sendMessage("設定されていません。");
 				return true;
 			}
-			return false;
-		} else if(cmd.getName().equalsIgnoreCase("twp")) {
-			if(args.length == 1) {
-				Player player = (Player) sender;
-				List<String> l = instance.getConfig().getStringList("wp");
-				for(String lo : l) {
-					if(lo.startsWith(args[0])) {
-						Location loc = StoL(lo);
-						player.teleport(loc);
-					}
+			for (String key : wplist.keySet()) {
+	            player.sendMessage(key + "(X:" + wplist.get(key).getX() + " Y:" + wplist.get(key).getY() + " Z:" + wplist.get(key).getZ() + ")");
+	        }
+			return true;
+		} else if(args.length == 1) {
+			if(wplist.containsKey(args[0])) {
+				player.teleport(wplist.get(args[0]));
+				return true;
+			} else {
+				player.sendMessage("ポイントが見つかりません。");
+				return true;
+			}
+		} else if(args.length == 2) {
+			if(args[0].equalsIgnoreCase("set")) {
+				if(wplist.containsKey(args[1])) {
+					player.sendMessage("すでにそのポイントは存在します。");
+					player.sendMessage("/wp del " + args[1] + " と入力し削除してから再実行して下さい。");
+					return true;
+				} else {
+					wplist.put(args[1], player.getLocation());
+					player.sendMessage("ポイントを設定しました。 ポイント名:" + args[1]);
+					instance.getConfig().set("wp", wplist);
+					instance.saveConfig();
+					return true;
 				}
-			return true;
+			} else if(args[0].equalsIgnoreCase("del")) {
+				if(wplist.containsKey(args[1])) {
+					wplist.remove(args[1]);
+					player.sendMessage("ポイントを削除しました。 ポイント名:" + args[1]);
+					instance.getConfig().set("wp", wplist);
+					instance.saveConfig();
+					return true;
+				} else {
+					player.sendMessage("ポイント" + args[1] + "は存在しません。");
+					return true;
+				}
 			}
-			return false;
-		} else if(cmd.getName().equalsIgnoreCase("lwp")) {
-			List<String> l = instance.getConfig().getStringList("wp");
-			for(String lo : l) {
-				sender.sendMessage(lo);
-			}
 			return true;
-		} else {
-			return false;
 		}
-	}
-
-	public static Location StoL(String Location) {
-		String[] loc = Location.split(",");
-		double[] parsed = new double[5];
-		for (int i = 0; i < 5; i++) {
-		    parsed[i] = Double.parseDouble(loc[i + 2]);
-		}
-		Location location = new Location (Bukkit.getWorld(loc[1]), parsed[0], parsed[1], parsed[2], (float)parsed[3], (float)parsed[4]);
-		return location;
-	}
-
-	public static String LtoS(Location loc,String name) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(name);
-		sb.append(",");
-		sb.append(loc.getWorld().getName());
-		sb.append(",");
-		sb.append((int)loc.getX());
-		sb.append(",");
-		sb.append((int)loc.getY());
-		sb.append(",");
-		sb.append((int)loc.getZ());
-		sb.append(",");
-		sb.append((int)loc.getPitch());
-		sb.append(",");
-		sb.append((int)loc.getYaw());
-		return sb.toString();
+		return true;
 	}
 }

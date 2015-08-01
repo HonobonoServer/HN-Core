@@ -24,7 +24,7 @@ public class freeze implements CommandExecutor,Listener{
 			if (args.length == 1) {
 				Player player = instance.getServer().getPlayer(args[0]);
 				freezer.put(player, player);
-				sendPacket.sendPlayer((Player) sender, sendPacket.setActionBar("§a" + player.getName() + "をFreezeしました"));
+				sendPacket.sendActionBar((Player) sender, "§a" + player.getName() + "をFreezeしました");
 				return true;
 			}
 			return false;
@@ -32,7 +32,7 @@ public class freeze implements CommandExecutor,Listener{
 			if(args.length == 1) {
 				Player player = instance.getServer().getPlayer(args[0]);
 				freezer.remove(player);
-				sendPacket.sendPlayer((Player) sender, sendPacket.setActionBar("§a" + player.getName() + "をUnFreezeしました"));
+				sendPacket.sendActionBar((Player) sender, "§a" + player.getName() + "をUnFreezeしました");
 				return true;
 			}
 			return false;

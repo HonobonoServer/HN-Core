@@ -14,7 +14,7 @@ import org.bukkit.plugin.Plugin;
 
 import co.honobono.hncore.util.Other;
 
-public class LoginMessage implements Listener{
+public class LoginMessage implements Listener {
 	private Plugin instance = HNCore.getInstance();
 
 	@EventHandler
@@ -23,25 +23,25 @@ public class LoginMessage implements Listener{
 		event.setJoinMessage("");
 
 		String JoinMessage = instance.getConfig().getString("LoginMessage.LoginMessage");
-			Bukkit.broadcastMessage(Other.color(JoinMessage, player));
-		if(!(player.hasPlayedBefore())) {
+		Bukkit.broadcastMessage(Other.color(JoinMessage, player));
+		if (!(player.hasPlayedBefore())) {
 			List<String> First = instance.getConfig().getStringList("LoginMessage.FirstLogin");
-			for(String first : First) {
+			for (String first : First) {
 				first = Other.color(first, player);
 				Bukkit.broadcastMessage(first);
 			}
 		}
 
 		List<String> LoginMessage = instance.getConfig().getStringList("LoginMessage.Login");
-		for ( String m : LoginMessage) {
+		for (String m : LoginMessage) {
 			player.sendMessage(Other.color(m, player));
 		}
-		//hideコマンド使用者を適応
+		// hideコマンド使用者を適応
 		Map<Player, Player> hiders = show_hide.gethider();
 		for (Entry<Player, Player> entry : hiders.entrySet()) {
-            Player hider = entry.getValue();
-            player.hidePlayer(hider);
-        }
+			Player hider = entry.getValue();
+			player.hidePlayer(hider);
+		}
 	}
 
 	@EventHandler
