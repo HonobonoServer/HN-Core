@@ -25,7 +25,7 @@ public class light implements CommandExecutor, Listener {
 	//private static Light Light;
 
 	@SuppressWarnings("unchecked")
-	private static List<Location> list = (List<Location>) instance.getConfig().get("light");
+	private static List<String> list = (List<String>) instance.getConfig().get("light");
 	private static MetadataValue set = new FixedMetadataValue(instance, "set");
 	private static MetadataValue del = new FixedMetadataValue(instance, "del");
 	private static MetadataValue nul = new FixedMetadataValue(instance, "null");
@@ -34,13 +34,13 @@ public class light implements CommandExecutor, Listener {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		Player player = (Player) sender;
 		if (list == null) {
-			list = new ArrayList<Location>();
+			list = new ArrayList<String>();
 		}
 		if (args.length == 0) {
 			if (list.size() == 0) {
 				player.sendMessage("設置されていません。");
 			}
-			for (Location l : list) {
+			for (String l : list) {
 				player.sendMessage(l.toString());
 			}
 			return true;
@@ -67,26 +67,28 @@ public class light implements CommandExecutor, Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		if (player.getMetadata("light").get(0) == null) {
+		if (player.getMetadata("light").size() == 0) {
 			player.setMetadata("light", nul);
 			return;
 		}
 		String s = player.getMetadata("light").get(0).asString();
 		Location loc = event.getClickedBlock().getLocation();
 		if (s.equalsIgnoreCase("set")) {
-			if (list.contains(loc)) {
+			if (list.contains(loc.toString())) {
 				player.sendMessage("その場所にはすでに設置されています");
 			} else {
-				list.add(loc);
+				list.add(loc.toString());
 				Light.createLight(loc, player.getMetadata("lightlevel").get(0).asInt());
+				Light.sendUpdateChunks();
 				instance.getConfig().set("light", list);
 				instance.saveConfig();
 				player.sendMessage("光源を設置しました。");
 			}
 		} else if (s.equalsIgnoreCase("del")) {
-			if (list.contains(list)) {
-				list.remove(loc);
+			if (list.contains(list.toString())) {
+				list.remove(loc.toString());
 				Light.deleteLight(loc);
+				Light.sendUpdateChunks();
 				instance.getConfig().set("light", list);
 				instance.saveConfig();
 				player.sendMessage("光源を削除しました");
