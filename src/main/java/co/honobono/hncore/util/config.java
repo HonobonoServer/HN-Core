@@ -56,12 +56,26 @@ public class config {
 	public static FileConfiguration get(String filename) {
 		FileConfiguration config = new YamlConfiguration();
 		Reader rd;
+		if(!filename.endsWith(".yml")){
+			filename =  filename + ".yml";
+		}
 		try {
-			rd = new InputStreamReader(instance.getResource(filename + ".yml"),"SJIS");
+			rd = new InputStreamReader(instance.getResource(filename),"SJIS");
 			config.load(rd);
 		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
 		return config;
+	}
+
+	public static void save(FileConfiguration f, String filename) {
+		if(!filename.endsWith(".yml")){
+			filename =  filename + ".yml";
+		}
+		try {
+			f.save(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

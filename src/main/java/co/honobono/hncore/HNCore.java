@@ -13,12 +13,13 @@ public class HNCore extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		// 準備
+		//準備
 		instance = this;
 		getLogger().info("HN-Coreを起動しました");
 		announce();
 		// config読み込み
 		this.saveDefaultConfig();
+		this.reloadConfig();
 		config.create("lang.yml");
 		// コマンドの設定
 		getCommand("hnconfig").setExecutor(new hnconfig());
@@ -33,10 +34,8 @@ public class HNCore extends JavaPlugin {
 		getCommand("al").setExecutor(new itemremove());
 		getCommand("freeze").setExecutor(new freeze());
 		getCommand("unfreeze").setExecutor(new freeze());
-		getCommand("wp").setExecutor(new wp());
 		getCommand("home").setExecutor(new home());
 		getCommand("hnannounce").setExecutor(new announce());
-		getCommand("hnlight").setExecutor(new light());
 
 		// Listener
 		getServer().getPluginManager().registerEvents(new blockreplace(), this);
@@ -49,7 +48,6 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new announce(), this);
 		getServer().getPluginManager().registerEvents(new ShowCommand(), this);
-		getServer().getPluginManager().registerEvents(new light(), this);
 	}
 
 
