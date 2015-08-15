@@ -17,21 +17,27 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import co.honobono.hncore.HNCore;
+public class CustomConfig {
 
-public class config {
-	private static Plugin instance = HNCore.getInstance();
+	private String f;
+	private Plugin instance;
+	private FileConfiguration FileC;
 
-	public static void create(String filename) {
-		if(!filename.endsWith(".yml")){
-			filename =  filename + ".yml";
+	public CustomConfig(String filename, Plugin instance) {
+		if(filename.endsWith(".yml")) {
+			filename = filename + ".yml";
 		}
-		File config = new File(instance.getDataFolder(), filename);
+		this.f = filename;
+		this.instance = instance;
+	}
+
+	public void Create() {
+		File config = new File(instance.getDataFolder(), f);
 		if(config.exists()) { return; }
 		InputStream is = null;
 		OutputStream os = null;
 		try {
-			is = instance.getResource(filename);
+			is = instance.getResource(f);
 			os = new FileOutputStream(config);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -53,29 +59,23 @@ public class config {
 		pw.close();
 	}
 
-	public static FileConfiguration get(String filename) {
-		FileConfiguration config = new YamlConfiguration();
-		Reader rd;
-		if(!filename.endsWith(".yml")){
-			filename =  filename + ".yml";
-		}
+	public void save() {
 		try {
-			rd = new InputStreamReader(instance.getResource(filename),"SJIS");
-			config.load(rd);
-		} catch (IOException | InvalidConfigurationException e) {
-			e.printStackTrace();
-		}
-		return config;
-	}
-
-	public static void save(FileConfiguration f, String filename) {
-		if(!filename.endsWith(".yml")){
-			filename =  filename + ".yml";
-		}
-		try {
-			f.save(filename);
+			FileC.save(f);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public FileConfiguration getConfig() {
+		Reader rd;
+		FileC = new YamlConfiguration();
+		try {
+			rd = new InputStreamReader(instance.getResource(f),"SJIS");
+			FileC.load(rd);
+		} catch (IOException | InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
+		return FileC;
 	}
 }
