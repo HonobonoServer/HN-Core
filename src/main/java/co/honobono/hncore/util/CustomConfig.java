@@ -19,26 +19,31 @@ import org.bukkit.plugin.Plugin;
 
 public class CustomConfig {
 
-	private String f;
+	private File f;
+	private String fn;
 	private Plugin instance;
 	private FileConfiguration FileC;
 
 	public CustomConfig(String filename, Plugin instance) {
-		if(filename.endsWith(".yml")) {
+		if(!filename.endsWith(".yml")) {
 			filename = filename + ".yml";
 		}
-		this.f = filename;
+		this.fn = filename;
+		this.f = new File(instance.getDataFolder(), filename);
 		this.instance = instance;
 	}
 
-	public void Create() {
-		File config = new File(instance.getDataFolder(), f);
-		if(config.exists()) { return; }
+	public void create() throws IOException{
+		if(f.exists()) { return; }
+		f.createNewFile();
 		InputStream is = null;
 		OutputStream os = null;
 		try {
-			is = instance.getResource(f);
-			os = new FileOutputStream(config);
+			is = instance.getResource(fn);
+			if(is == null) {
+				return;
+			}
+			os = new FileOutputStream(f);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -67,11 +72,18 @@ public class CustomConfig {
 		}
 	}
 
+	public void setConfig(FileConfiguration f) {
+		this.FileC = f;
+	}
 	public FileConfiguration getConfig() {
 		Reader rd;
 		FileC = new YamlConfiguration();
+		InputStream ip = instance.getResource(fn);
+		if(ip == null) {
+			return FileC;
+		}
 		try {
-			rd = new InputStreamReader(instance.getResource(f),"SJIS");
+			rd = new InputStreamReader(ip);
 			FileC.load(rd);
 		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();

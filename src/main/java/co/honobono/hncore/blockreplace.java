@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 
@@ -32,6 +31,7 @@ public class blockreplace implements Listener{
 		}
 	}
 
+	/*
 	@EventHandler
 	public void piston(BlockPhysicsEvent event) {
 		if(event.getBlock().getType() != Material.PISTON_EXTENSION) {
@@ -39,4 +39,5 @@ public class blockreplace implements Listener{
 		}
 		event.setCancelled(true);
 	}
+	*/
 }

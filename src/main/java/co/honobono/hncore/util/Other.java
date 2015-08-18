@@ -635,8 +635,12 @@ public class Other {
 
 		str = str.replaceAll("mjd", "マジで");
 		str = str.replaceAll("mj", "マジ");
-		str = str.replaceAll("dsyn", "でしょうね");
-		str = str.replaceAll("www", "草生えるw");
+		str = str.replaceAll("dsyn", "ですよね");
+		str = str.replaceAll("tmp", "ちんぽ");
+		str = str.replaceAll("tnp", "ちんぽ");
+		str = str.replaceAll("wtf", "what the fuck ");
+		str = str.replaceAll("fml", "fuck my life");
+		str = str.replaceAll("fm", "ふむ");
 		str = str.replaceAll("n", "ん");
 
 		color(str, null);
@@ -760,15 +764,27 @@ public class Other {
 		}
 	}
 
+	/**
+	 * Location.toStringした値をLocationに戻します。
+	 * @param s LyoStringした値
+	 * @return 復元したLocation
+	 */
 	public static Location toLocation(String s) {
 		String[] loc = s.split(",");
 		World w = Bukkit.getWorld(loc[0].substring(31, loc[0].length() - 1));
 		double x = Double.valueOf(loc[1].substring(2, loc[1].length()));
 		double y = Double.valueOf(loc[2].substring(2, loc[2].length()));
 		double z = Double.valueOf(loc[3].substring(2, loc[3].length()));
-		float pitch = Float.valueOf(loc[4].substring(2, loc[4].length()));
-		float yaw = Float.valueOf(loc[5].substring(2, loc[5].length()));
-		Location loc1 = new Location(w, x, y, z, pitch, yaw);
+		float pitch = Float.valueOf(loc[4].substring(6, loc[4].length()));
+		float yaw = Float.valueOf(loc[5].substring(4, loc[5].length() - 1));
+		Location loc1 = new Location(w, x, y, z, yaw, pitch);
 		return loc1;
+	}
+
+	public static boolean include(Object o1, Object... obj) {
+		for(Object o : obj) {
+			if(o1.equals(o))return true;
+		}
+		return false;
 	}
 }

@@ -22,7 +22,6 @@ LoginMessage:
  Login:
   - Hello! Honobonoserver!
   - Test1!
-  - kennzoubaka!
 
  #サーバーを出た時に表示されるメッセージを表示します
  LogoutMessage: "&e<player>様がログアウトしました"

@@ -63,7 +63,7 @@ public class Train {
 		Sign sign = (Sign) block.getBlock().getState();
 		if(block.getBlock().getBlockPower() < 0) { return null; }
 		String[] signs = sign.getLines();
-		if(!(signs[0].equalsIgnoreCase("[HNTrain]"))) { return null; }
+		if(!(signs[0].equalsIgnoreCase("[HNTrain]") || (signs[0].equalsIgnoreCase("[HN-Train]")))) { return null; }
 		return block.getBlock();
 	}
 

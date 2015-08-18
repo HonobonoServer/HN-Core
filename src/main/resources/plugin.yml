@@ -1,5 +1,5 @@
 name: HN-Core
-version: beta-1.0.1
+version: beta-1.0.2
 author: syu_chan_1005
 main: co.honobono.hncore.HNCore
 
@@ -64,11 +64,6 @@ commands:
       usage: /<command>
       permission: hncore.unfreeze
       permission-message: Unknown command. Type "/help" for help.
-   wp:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.wp
-      permission-message: Unknown command. Type "/help" for help.
    home:
       description: This is a admin command
       usage: /<command>
@@ -79,8 +74,18 @@ commands:
       usage: /<command>
       permission: hncore.hnannounce
       permission-message: Unknown command. Type "/help" for help.
-   hnlight:
+   test:
       description: This is a admin command
       usage: /<command>
-      permission: hncore.hnlight
+      permission: hncore.test
+      permission-message: Unknown command. Type "/help" for help.
+   wp:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.test
+      permission-message: Unknown command. Type "/help" for help.
+   light:
+      description: This is a admin command
+      usage: /<command>
+      permission: hncore.test
       permission-message: Unknown command. Type "/help" for help.

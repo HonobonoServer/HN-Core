@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 
 import co.honobono.hncore.util.Other;
@@ -42,6 +43,8 @@ public class LoginMessage implements Listener {
 			Player hider = entry.getValue();
 			player.hidePlayer(hider);
 		}
+		//Lightの前準備
+		player.setMetadata("light", new FixedMetadataValue(instance, "non"));
 	}
 
 	@EventHandler
