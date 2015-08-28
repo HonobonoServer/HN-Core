@@ -31,7 +31,7 @@ public class Chat implements Listener{
 		sb.append(event.getPlayer().getDisplayName());
 		sb.append("> ");
 		sb.append(msg);
-		if (!Other.isZenkaku(msg)) {
+		if (!(Other.isZenkaku(msg) || msg.startsWith("http://") || msg.startsWith("https://"))) {
 			msg = msg.replaceAll("(\"[^\"]*\")", "\t$1\t");
 			List<String> lmsg = Arrays.asList(msg.split("\t"));
 			sb.append("(");

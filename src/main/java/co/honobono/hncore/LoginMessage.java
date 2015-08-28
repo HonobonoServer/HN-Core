@@ -1,8 +1,6 @@
 package co.honobono.hncore;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -38,9 +36,8 @@ public class LoginMessage implements Listener {
 			player.sendMessage(Other.color(m, player));
 		}
 		// hideコマンド使用者を適応
-		Map<Player, Player> hiders = show_hide.gethider();
-		for (Entry<Player, Player> entry : hiders.entrySet()) {
-			Player hider = entry.getValue();
+		List<Player> hiders = show_hide.gethider();
+		for (Player hider : hiders) {
 			player.hidePlayer(hider);
 		}
 		//Lightの前準備

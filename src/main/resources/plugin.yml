@@ -4,25 +4,10 @@ author: syu_chan_1005
 main: co.honobono.hncore.HNCore
 
 commands:
-   hnconfig:
-      description: This is a change config command.
-      usage: /<command> <config_directory> <value>
-      permission: hncore.config
-      permission-message: Unknown command. Type "/help" for help.
-   hnreload:
-      description: This is a reload config command.
-      usage: /<command>
-      permission: hncore.reload
-      permission-message: Unknown command. Type "/help" for help.
    hnget:
       description: This is a admin command
       usage: /<command> <ItemID> <meta>
       permission: hncore.get
-      permission-message: Unknown command. Type "/help" for help.
-   hntp:
-      description: This is a admin command
-      usage: /<command> <playername> or /<command> <location-X> <location-Y> <location-Z> (<location-World>)
-      permission: hncore.hntp
       permission-message: Unknown command. Type "/help" for help.
    show:
       description: This is a admin command
@@ -44,11 +29,6 @@ commands:
       usage: /<command>
       permission: hncore.adminchat
       permission-message: Unknown command. Type "/help" for help.
-   ir:
-      description: This is a admin command
-      usage: /<command> <range>
-      permission: hncore.itemremove
-      permission-message: Unknown command. Type "/help" for help.
    al:
       description: This is a admin command
       usage: /<command> <range>
@@ -63,11 +43,6 @@ commands:
       description: This is a admin command
       usage: /<command>
       permission: hncore.unfreeze
-      permission-message: Unknown command. Type "/help" for help.
-   home:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.home
       permission-message: Unknown command. Type "/help" for help.
    hnannounce:
       description: This is a admin command
@@ -88,4 +63,9 @@ commands:
       description: This is a admin command
       usage: /<command>
       permission: hncore.test
+      permission-message: Unknown command. Type "/help" for help.
+   report:
+      description: report
+      usage: /<command> <player> <reason>
+      permission: hncore.report
       permission-message: Unknown command. Type "/help" for help.

@@ -355,7 +355,7 @@ public class Other {
 
 		str = str.replaceAll("fa", "ふぁ");
 		str = str.replaceAll("fi", "ふぃ");
-		str = str.replaceAll("fu", "ふぅ");
+		str = str.replaceAll("fu", "ふ");
 		str = str.replaceAll("fe", "ふぇ");
 		str = str.replaceAll("fo", "ふぉ");
 
@@ -558,9 +558,9 @@ public class Other {
 		str = str.replaceAll("ro", "ろ");
 
 		str = str.replaceAll("wa", "わ");
-		str = str.replaceAll("wi", "ゐ");
+		str = str.replaceAll("wi", "うぃ");
 		str = str.replaceAll("wu", "う");
-		str = str.replaceAll("we", "ゑ");
+		str = str.replaceAll("we", "うぇ");
 		str = str.replaceAll("wo", "を");
 
 		str = str.replaceAll("fa", "ふぁ");
@@ -634,14 +634,19 @@ public class Other {
 		str = str.replaceAll("~", "～");
 
 		str = str.replaceAll("mjd", "マジで");
+		str = str.replaceAll("mjk", "マジか");
 		str = str.replaceAll("mj", "マジ");
 		str = str.replaceAll("dsyn", "ですよね");
 		str = str.replaceAll("tmp", "ちんぽ");
 		str = str.replaceAll("tnp", "ちんぽ");
-		str = str.replaceAll("wtf", "what the fuck ");
+		str = str.replaceAll("wtf", "what the fuck");
 		str = str.replaceAll("fml", "fuck my life");
 		str = str.replaceAll("fm", "ふむ");
+		str = str.replaceAll("srn", "それな");
+		str = str.replaceAll("np", "no problem");
 		str = str.replaceAll("n", "ん");
+		str = str.replaceAll("んo problem", "no problem");
+		str = str.replaceAll("thx", "thanks");
 
 		color(str, null);
 

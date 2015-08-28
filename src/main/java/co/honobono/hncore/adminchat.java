@@ -31,7 +31,11 @@ public class adminchat implements Listener, CommandExecutor{
 				return true;
 			}
 		} else {
-			Bukkit.broadcast("<" + ((Player)sender).getDisplayName() + "> " + "§b" + args[0], "hncore.adminchat");
+			String s = "";
+			for(String a : args) {
+				s = s +  " " + a;
+			}
+			Bukkit.broadcast("<" + ((Player)sender).getDisplayName() + "> " + "§b" + s, "hncore.adminchat");
 			return true;
 		}
 	}

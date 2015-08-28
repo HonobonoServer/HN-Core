@@ -36,6 +36,8 @@ public class light implements CommandExecutor, Listener {
 			} else if (args[0].equalsIgnoreCase("del")) {
 				player.setMetadata("light", new FixedMetadataValue(instance, "del"));
 				player.sendMessage("光源を削除する場所を右クリックしてください。");
+			} else if(args[0].equalsIgnoreCase("reload")) {
+				Light.sendUpdateChunks();
 			}
 			return true;
 		} else if (args.length == 2) {
@@ -90,8 +92,9 @@ public class light implements CommandExecutor, Listener {
 	@EventHandler
 	public void destorylight(BlockBreakEvent event) {
 		Location loc = event.getBlock().getLocation();
+		Light.deleteLight(loc);
 		if(get(loc)) {
-			Light.deleteLight(loc);
+			del(loc);
 			event.getPlayer().sendMessage("光源を削除しました");
 		}
 	}

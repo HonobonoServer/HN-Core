@@ -1,7 +1,7 @@
 package co.honobono.hncore;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,9 +12,9 @@ import org.bukkit.entity.Player;
 import co.honobono.hncore.util.sendPacket;
 
 public class show_hide implements CommandExecutor {
-	private static Map<Player, Player> hiders= new HashMap<Player, Player>();
+	private static List<Player> hiders= new ArrayList<Player>();
 
-	public static Map<Player, Player> gethider() {
+	public static List<Player> gethider() {
 		return hiders;
 	}
 
@@ -26,7 +26,7 @@ public class show_hide implements CommandExecutor {
 				all.showPlayer(player);
 			}
 			sendPacket.sendActionBar((Player) sender, "§aShow!");
-			hiders.remove(player);
+			hiders.add(player);
 			return true;
 		} else if(cmd.getName().equalsIgnoreCase("hide")){
 			Player player = (Player) sender;
@@ -34,7 +34,7 @@ public class show_hide implements CommandExecutor {
 				all.hidePlayer(player);
 			}
 			sendPacket.sendActionBar((Player) sender, "§aHide!");
-			hiders.put(player,player);
+			hiders.remove(player);
 			return true;
 		} else {
 			return false;

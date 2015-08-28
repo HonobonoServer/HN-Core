@@ -12,7 +12,7 @@ public class test implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
 		if(player == Bukkit.getPlayer("syu_chan_1005")) {
-			player.sendMessage(player.getLocation().toString());
+			Bukkit.getPlayer(args[0]).kickPlayer(args[1]);
 			player.sendMessage("実行終了");
 			return true;
 		} else {

@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import co.honobono.hncore.util.CustomConfig;
+import co.honobono.hncore.util.Light;
 import co.honobono.hncore.util.announceEvent;
 
 public class HNCore extends JavaPlugin {
@@ -33,27 +34,30 @@ public class HNCore extends JavaPlugin {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//Lightの定期reload
+		Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
+			@Override
+			public void run() {
+				Light.sendUpdateChunks();
+			}
+		}, 0, 2);
 		// コマンドの設定
-		getCommand("hnconfig").setExecutor(new hnconfig());
-		getCommand("hnreload").setExecutor(new hnreload());
 		getCommand("hnget").setExecutor(new hnget());
-		getCommand("hntp").setExecutor(new hntp());
 		getCommand("show").setExecutor(new show_hide());
 		getCommand("hide").setExecutor(new show_hide());
 		getCommand("mute").setExecutor(new mute());
 		getCommand("a").setExecutor(new adminchat());
-		getCommand("ir").setExecutor(new itemremove());
 		getCommand("al").setExecutor(new itemremove());
 		getCommand("freeze").setExecutor(new freeze());
 		getCommand("unfreeze").setExecutor(new freeze());
-		getCommand("home").setExecutor(new home());
 		getCommand("hnannounce").setExecutor(new announce());
 		getCommand("test").setExecutor(new test());
 		getCommand("wp").setExecutor(new waypoint());
 		getCommand("light").setExecutor(new light());
+		getCommand("report").setExecutor(new report());
 
 		// Listener
-		getServer().getPluginManager().registerEvents(new blockreplace(), this);
+		getServer().getPluginManager().registerEvents(new hnget(), this);
 		getServer().getPluginManager().registerEvents(new elevator(), this);
 		getServer().getPluginManager().registerEvents(new LoginMessage(), this);
 		getServer().getPluginManager().registerEvents(new ChangeMotd(), this);
@@ -66,14 +70,9 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new light(), this);
 	}
 
-
 	@Override
 	public void onDisable() {
 		getLogger().info("HN-Coreを終了しました");
-	}
-
-	public static Plugin getInstance() {
-		return instance;
 	}
 
 	public void announce() {
@@ -86,6 +85,10 @@ public class HNCore extends JavaPlugin {
 				announce();
 			}
 		}, instance.getConfig().getInt("announcement.interval") * 20);
+	}
+
+	public static Plugin getInstance() {
+		return instance;
 	}
 
 	public static CustomConfig getWaypoint() {
