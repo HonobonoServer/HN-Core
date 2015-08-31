@@ -25,7 +25,7 @@ public class CustomConfig {
 	private FileConfiguration FileC;
 
 	public CustomConfig(String filename, Plugin instance) {
-		if(!filename.endsWith(".yml")) {
+		if (!filename.endsWith(".yml")) {
 			filename = filename + ".yml";
 		}
 		this.fn = filename;
@@ -33,14 +33,16 @@ public class CustomConfig {
 		this.instance = instance;
 	}
 
-	public void create() throws IOException{
-		if(f.exists()) { return; }
+	public void create() throws IOException {
+		if (f.exists()) {
+			return;
+		}
 		f.createNewFile();
 		InputStream is = null;
 		OutputStream os = null;
 		try {
 			is = instance.getResource(fn);
-			if(is == null) {
+			if (is == null) {
 				return;
 			}
 			os = new FileOutputStream(f);
@@ -75,11 +77,12 @@ public class CustomConfig {
 	public void setConfig(FileConfiguration f) {
 		this.FileC = f;
 	}
+
 	public FileConfiguration getConfig() {
 		Reader rd;
 		FileC = new YamlConfiguration();
 		InputStream ip = instance.getResource(fn);
-		if(ip == null) {
+		if (ip == null) {
 			return FileC;
 		}
 		try {

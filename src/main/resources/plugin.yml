@@ -69,3 +69,8 @@ commands:
       usage: /<command> <player> <reason>
       permission: hncore.report
       permission-message: Unknown command. Type "/help" for help.
+   hnlook:
+      description: hnlook
+      usage: /<command> (player)
+      permission: hncore.hnlook
+      permission-message: Unknown command. Type "/help" for help.

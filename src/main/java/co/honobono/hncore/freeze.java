@@ -1,7 +1,7 @@
 package co.honobono.hncore;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,14 +16,14 @@ import co.honobono.hncore.util.sendPacket;
 
 public class freeze implements CommandExecutor,Listener{
 	private Plugin instance = HNCore.getInstance();
-	private static Map<Player, Player> freezer= new HashMap<Player, Player>();
+	private static List<Player> freezer= new ArrayList<Player>();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if(cmd.getName().equalsIgnoreCase("freeze")){
 			if (args.length == 1) {
 				Player player = instance.getServer().getPlayer(args[0]);
-				freezer.put(player, player);
+				freezer.add(player);
 				sendPacket.sendActionBar((Player) sender, "§a" + player.getName() + "をFreezeしました");
 				return true;
 			}
@@ -42,8 +42,8 @@ public class freeze implements CommandExecutor,Listener{
 	}
 
 	@EventHandler
-	public void Mute(PlayerMoveEvent event) {
-		if(freezer.containsKey(event.getPlayer())) {
+	public void moveoff(PlayerMoveEvent event) {
+		if(freezer.contains(event.getPlayer())) {
 			event.setCancelled(true);
 		}
 	}

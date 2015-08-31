@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import co.honobono.hncore.util.Japanese;
 import co.honobono.hncore.util.Other;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
@@ -36,7 +37,7 @@ public class Chat implements Listener{
 			List<String> lmsg = Arrays.asList(msg.split("\t"));
 			sb.append("(");
 			for(String m : lmsg) {
-			sb.append(Other.toJP(m, katakana, ime));
+			sb.append(Japanese.toJP(m, katakana, ime));
 			}
 			sb.append(")");
 		}

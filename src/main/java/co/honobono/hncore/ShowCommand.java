@@ -12,7 +12,7 @@ public class ShowCommand implements Listener{
 	private static Plugin instance = HNCore.getInstance();
 
 	@EventHandler
-	public static void sendCommand(PlayerCommandPreprocessEvent event) {
+	public void sendCommand(PlayerCommandPreprocessEvent event) {
 		String format = instance.getConfig().getString("ShowCommand.format");
 		format = format.replaceAll("<prefix>", instance.getConfig().getString("ShowCommand.prefix"));
 		format = format.replaceAll("<command>", event.getMessage());

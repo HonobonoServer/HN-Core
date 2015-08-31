@@ -1,15 +1,15 @@
 package co.honobono.hncore;
 
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.Statistic;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.plugin.Plugin;
 
@@ -17,40 +17,38 @@ import co.honobono.hncore.util.Particle;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 
 public class elevator implements Listener {
-
 	private Plugin instance = HNCore.getInstance();
+	private Map<Material, Integer> bls = new HashMap<Material, Integer>();
+
+	{
+		for (String a : instance.getConfig().getStringList("elevator")) {
+			String[] b = a.split(":");
+			bls.put(Material.getMaterial(b[0]), Integer.valueOf(b[1]));
+		}
+	}
 
 	@EventHandler
-	public void elevatorup(PlayerMoveEvent event) {
-		if (event.getTo().getY() - event.getFrom().getY() > 0.4 && event.getTo().getY() - event.getFrom().getY() < 0.5
-				&& event.getPlayer().getLocation().subtract(0, 1, 0).getBlock().getType() != Material.AIR
-				&& event.getPlayer().getLocation().getBlock().getType().isTransparent()) {
-			List<String> blocks = instance.getConfig().getStringList("elevator");
-			for (String blk : blocks) {
-				Matcher m = Pattern.compile(":").matcher(blk);
-				if (!m.find()) {
-					break;
-				}
-				Location loc = event.getPlayer().getLocation();
-				Material block = Material.getMaterial(blk.substring(0, m.start()));
-				int scope = Integer.parseInt(blk.substring(m.start() + 1));
-				if (loc.subtract(0, 1, 0).getBlock().getType() != block) {
-					continue;
-				}
-				for (int i = 0; i < scope; i++) {
-					loc.setY(loc.getY() + 1);
-					if (loc.getBlock().getType() != block) {
-						continue;
-					}
-					if (loc.add(0, 1, 0).getBlock().getType().isTransparent()
-							&& loc.add(0, 1, 0).getBlock().getType().isTransparent()
-							&& loc.add(0, 1, 0).getBlock().getType().isTransparent()) {
-						event.getPlayer().teleport(loc.subtract(0, 2, 0));
-						event.getPlayer().playSound(loc, Sound.ENDERMAN_TELEPORT, 10, 1);
-						Particle.normal(event.getPlayer(), EnumParticle.PORTAL, loc.subtract(0, 1, 0), 50);
-						break;
-					}
-				}
+	public void elevatorup(PlayerStatisticIncrementEvent event) {
+		if (event.getStatistic() != Statistic.JUMP) {
+			return;
+		}
+		Location loc = event.getPlayer().getLocation();
+		Material m = loc.subtract(0, 1, 0).getBlock().getType();
+		if (!bls.containsKey(m)) {
+			return;
+		}
+		int scope = bls.get(m);
+		for (int i = 0; i < scope; i++) {
+			loc.setY(loc.getY() + 1);
+			if (loc.getBlock().getType() != m) {
+				continue;
+			}
+			if (loc.add(0, 1, 0).getBlock().getType().isTransparent()
+					&& loc.add(0, 1, 0).getBlock().getType().isTransparent()) {
+				event.getPlayer().teleport(loc.subtract(0, 1, 0));
+				event.getPlayer().playSound(loc, Sound.ENDERMAN_TELEPORT, 10, 1);
+				Particle.normal(event.getPlayer(), EnumParticle.PORTAL, loc.subtract(0, 1, 0), 5);
+				break;
 			}
 		}
 	}
@@ -60,31 +58,23 @@ public class elevator implements Listener {
 		if (event.isSneaking() == false) {
 			return;
 		}
-		List<String> blocks = instance.getConfig().getStringList("elevator");
-		for (String blk : blocks) {
-			Matcher m = Pattern.compile(":").matcher(blk);
-			if (!m.find()) {
-				break;
-			}
-			Location loc = event.getPlayer().getLocation();
-			Material block = Material.getMaterial(blk.substring(0, m.start()));
-			int scope = Integer.parseInt(blk.substring(m.start() + 1));
-			if (loc.subtract(0, 1, 0).getBlock().getType() != block) {
+		Location loc = event.getPlayer().getLocation();
+		Material m = loc.subtract(0, 1, 0).getBlock().getType();
+		if (!bls.containsKey(m)) {
+			return;
+		}
+		int scope = bls.get(m);
+		for (int i = 0; i < scope; i++) {
+			loc.setY(loc.getY() - 1);
+			if (loc.getBlock().getType() != m) {
 				continue;
 			}
-			for (int i = 0; i < scope; i++) {
-				loc.setY(loc.getY() - 1);
-				if (loc.getBlock().getType() != block) {
-					continue;
-				}
-				if (loc.add(0, 1, 0).getBlock().getType().isTransparent()
-						&& loc.add(0, 1, 0).getBlock().getType().isTransparent()
-						&& loc.add(0, 1, 0).getBlock().getType().isTransparent()) {
-					event.getPlayer().teleport(loc.subtract(0, 2, 0));
-					event.getPlayer().playSound(loc, Sound.ENDERMAN_TELEPORT, 10, 1);
-					Particle.normal(event.getPlayer(), EnumParticle.PORTAL, loc.subtract(0, 1, 0), 50);
-					break;
-				}
+			if (loc.add(0, 1, 0).getBlock().getType().isTransparent()
+					&& loc.add(0, 1, 0).getBlock().getType().isTransparent()) {
+				event.getPlayer().teleport(loc.subtract(0, 1, 0));
+				event.getPlayer().playSound(loc, Sound.ENDERMAN_TELEPORT, 10, 1);
+				Particle.normal(event.getPlayer(), EnumParticle.PORTAL, loc.subtract(0, 1, 0), 5);
+				break;
 			}
 		}
 	}
