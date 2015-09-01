@@ -12,6 +12,31 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>sample.Main</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>../config/</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
     </plugins>
   </build>
   <repositories>
@@ -27,6 +52,11 @@
           <version>1.8.8-R0.1-SNAPSHOT</version>
           <type>jar</type>
           <scope>provided</scope>
+     </dependency>
+     <dependency>
+          <groupId>com.maxmind.geoip2</groupId>
+          <artifactId>geoip2</artifactId>
+          <version>2.2.0</version>
      </dependency>
   </dependencies>
   <version>beta-1.0.2</version>
