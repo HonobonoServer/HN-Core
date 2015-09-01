@@ -7,9 +7,11 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.Statistic;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.plugin.Plugin;
 
@@ -38,6 +40,7 @@ public class elevator implements Listener {
 			return;
 		}
 		int scope = bls.get(m);
+		Player player = event.getPlayer();
 		for (int i = 0; i < scope; i++) {
 			loc.setY(loc.getY() + 1);
 			if (loc.getBlock().getType() != m) {
@@ -45,10 +48,12 @@ public class elevator implements Listener {
 			}
 			if (loc.add(0, 1, 0).getBlock().getType().isTransparent()
 					&& loc.add(0, 1, 0).getBlock().getType().isTransparent()) {
-				event.getPlayer().teleport(loc.subtract(0, 1, 0));
-				event.getPlayer().playSound(loc, Sound.ENDERMAN_TELEPORT, 10, 1);
-				Particle.normal(event.getPlayer(), EnumParticle.PORTAL, loc.subtract(0, 1, 0), 5);
+				player.teleport(loc.subtract(0, 1, 0));
+				player.playSound(loc, Sound.ENDERMAN_TELEPORT, 10, 1);
+				Particle.normal(player, EnumParticle.PORTAL, loc.subtract(0, 1, 0), 5);
 				break;
+			} else {
+				continue;
 			}
 		}
 	}
@@ -64,6 +69,7 @@ public class elevator implements Listener {
 			return;
 		}
 		int scope = bls.get(m);
+		Player player = event.getPlayer();
 		for (int i = 0; i < scope; i++) {
 			loc.setY(loc.getY() - 1);
 			if (loc.getBlock().getType() != m) {
@@ -71,10 +77,13 @@ public class elevator implements Listener {
 			}
 			if (loc.add(0, 1, 0).getBlock().getType().isTransparent()
 					&& loc.add(0, 1, 0).getBlock().getType().isTransparent()) {
-				event.getPlayer().teleport(loc.subtract(0, 1, 0));
-				event.getPlayer().playSound(loc, Sound.ENDERMAN_TELEPORT, 10, 1);
-				Particle.normal(event.getPlayer(), EnumParticle.PORTAL, loc.subtract(0, 1, 0), 5);
+				loc.subtract(0, 1, 0);
+				player.teleport(loc, TeleportCause.PLUGIN);
+				player.playSound(loc, Sound.ENDERMAN_TELEPORT, 10, 1);
+				Particle.normal(player, EnumParticle.PORTAL, loc.subtract(0, 1, 0), 5);
 				break;
+			} else {
+				continue;
 			}
 		}
 	}
