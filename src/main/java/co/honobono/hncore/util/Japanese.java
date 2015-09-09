@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -575,8 +574,7 @@ public class Japanese {
 		try {
 			url = new URL(
 					"http://google.co.jp/transliterate?langpair=ja-Hira%7cja&text=" + URLEncoder.encode(kana, "UTF8"));
-			URLConnection conn = url.openConnection();
-			InputStream in = conn.getInputStream();
+			InputStream in = url.openStream();
 			try {
 				BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF8"));
 				StringBuilder sb = new StringBuilder();

@@ -16,7 +16,6 @@ import co.honobono.hncore.util.announceEvent;
 
 public class announce implements Listener, CommandExecutor {
 	private Plugin instance = HNCore.getInstance();
-	// private FileConfiguration conf = HNCore.getConf();
 	private int count = 0;
 
 	@EventHandler

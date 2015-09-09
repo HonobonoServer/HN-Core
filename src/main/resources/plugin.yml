@@ -74,3 +74,13 @@ commands:
       usage: /<command> (player)
       permission: hncore.hnlook
       permission-message: Unknown command. Type "/help" for help.
+   home:
+      description: home
+      usage: /<command> (player)
+      permission: hncore.home
+      permission-message: Unknown command. Type "/help" for help.
+   tweet:
+      description: tweet
+      usage: /<command> (message)
+      permission: hncore.tweet
+      permission-message: Unknown command. Type "/help" for help.

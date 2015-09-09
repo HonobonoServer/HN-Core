@@ -52,7 +52,7 @@ public class look implements CommandExecutor {
 			sender.sendMessage("UUID: " + player1.getUniqueId());
 			sender.sendMessage("最終ログイン: " + getTime(player1.getLastPlayed()));
 			sender.sendMessage("経験値: " + player1.getExpToLevel());
-			sender.sendMessage("体力: " + player1.getHealth());
+			sender.sendMessage("体力: " + player1.getHealth() + "/" + player1.getMaxHealth());
 			sender.sendMessage("AllowFlight: " + player1.getAllowFlight());
 			sender.sendMessage("IPアドレス: " + player1.getAddress() + "(" + getLoc(player1.getAddress().toString()) + ")");
 		}

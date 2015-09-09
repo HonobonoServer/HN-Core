@@ -1,4 +1,5 @@
-This software is released under the MIT License, see LICENSE.md.
+This software is released under the MIT License, see LICENSE-MIT.md.
+This software includes the work that is distributed in the Apache License 2.0, see LICENSE-Apache.md.
 
 この製品には MaxMind が作成した GeoLite2 データが含まれており、
 <a href="http://www.maxmind.com">http://www.maxmind.com</a> から入手いただけます。
@@ -10,6 +11,7 @@ This software is released under the MIT License, see LICENSE.md.
 またこのプラグインはMaxMindDBを使用します。
 Pluginを起動後[http://dev.maxmind.com/ja/geolite2/]よりGeoLite2-City.mmdbをダウンロードし
 plugin/HN-Core/MaxMindDB内に保存してください。
+またこのプラグインではTwitter4Jを使用しております。
 
 コマンドについて
 

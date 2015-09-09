@@ -34,7 +34,7 @@ public class elevator implements Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		Location loc = player.getLocation();
+		Location loc = player.getLocation().clone();
 		Material m = loc.subtract(0, 1, 0).getBlock().getType();
 		if (!bls.containsKey(m)) {
 			return;
@@ -63,7 +63,7 @@ public class elevator implements Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		Location loc = player.getLocation();
+		Location loc = player.getLocation().clone();
 		Material m = loc.subtract(0, 1, 0).getBlock().getType();
 		if (!bls.containsKey(m)) {
 			return;

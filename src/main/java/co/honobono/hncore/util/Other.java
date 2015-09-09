@@ -6,11 +6,14 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.bukkit.Achievement;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -187,5 +190,48 @@ public class Other {
 				return true;
 		}
 		return false;
+	}
+
+	private static Map<String, String> achievements = new HashMap<String, String>();
+
+	static {
+		achievements.put("ACQUIRE_IRON", "金属を手に入れる");
+		achievements.put("BAKE_CAKE", "the cake is a lie");
+		achievements.put("BOOKCASE", "司書");
+		achievements.put("BREED_COW", "種の繁栄");
+		achievements.put("BREW_POTION", "町の薬屋さん");
+		achievements.put("BUILD_BETTER_PICKAXE", "アップグレード");
+		achievements.put("BUILD_FURNACE", "ホットトピック");
+		achievements.put("BUILD_HOE", "いざ農業！");
+		achievements.put("BUILD_PICKAXE", "いざ採掘！");
+		achievements.put("BUILD_SWORD", "いざ突撃！");
+		achievements.put("BUILD_WORKBENCH", "土台作り");
+		achievements.put("COOK_FISH", "美味しい魚");
+		achievements.put("DIAMONDS_TO_YOU", "ダイアモンドをあなたに！");
+		achievements.put("ENCHANTMENTS", "エンチャントの使い手");
+		achievements.put("END_PORTAL", "おしまい？");
+		achievements.put("EXPLORE_ALL_BIOMES", "冒険の時間");
+		achievements.put("FLY_PIG", "ブタさんの飛ぶ頃に");
+		achievements.put("FULL_BEACON", "ビーコン使い");
+		achievements.put("GET_BLAZE_ROD", "炎の中へ");
+		achievements.put("GET_DIAMONDS", "ダイアモンド！");
+		achievements.put("GHAST_RETURN", "宛先不明");
+		achievements.put("KILL_COW", "牛転がし");
+		achievements.put("KILL_ENEMY", "モンスターハンター");
+		achievements.put("KILL_WITHER", "はじまり。");
+		achievements.put("MAKE_BREAD", "パンを焼こう");
+		achievements.put("MINE_WOOD", "木を手に入れる");
+		achievements.put("NETHER_PORTAL", "さらなる深みへ");
+		achievements.put("ON_A_RAIL", "線路の上で");
+		achievements.put("OPEN_INVENTORY", "所持品の確認");
+		achievements.put("OVERKILL", "オーバーキル");
+		achievements.put("OVERPOWERED", "圧倒的な力");
+		achievements.put("SNIPE_SKELETON", "スナイパー対決");
+		achievements.put("SPAWN_WITHER", "はじまり？");
+		achievements.put("THE_END", "おしまい。");
+	}
+
+	public static String AchievementtoJP(Achievement achieve) {
+		return achievements.get(achieve.name());
 	}
 }

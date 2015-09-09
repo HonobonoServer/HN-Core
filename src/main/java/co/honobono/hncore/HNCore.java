@@ -1,10 +1,13 @@
 package co.honobono.hncore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import co.honobono.hncore.util.Item;
 import co.honobono.hncore.util.announceEvent;
 
 public class HNCore extends JavaPlugin {
@@ -12,7 +15,7 @@ public class HNCore extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		//準備
+		// 準備
 		instance = this;
 		getLogger().info("HN-Coreを起動しました");
 		announce();
@@ -30,6 +33,8 @@ public class HNCore extends JavaPlugin {
 		getCommand("hnannounce").setExecutor(new announce());
 		getCommand("report").setExecutor(new report());
 		getCommand("hnlook").setExecutor(new look());
+		getCommand("home").setExecutor(new home());
+		getCommand("tweet").setExecutor(new Twitters());
 		getCommand("test").setExecutor(new test());
 		// Listener
 		getServer().getPluginManager().registerEvents(new hnget(), this);
@@ -42,7 +47,16 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new announce(), this);
 		getServer().getPluginManager().registerEvents(new ShowCommand(), this);
+		getServer().getPluginManager().registerEvents(new Wallet(), this);
 		getServer().getPluginManager().registerEvents(new test(), this);
+		getServer().getPluginManager().registerEvents(new Twitters(), this);
+
+		//財布レシピの追加
+		ShapedRecipe wallet = new ShapedRecipe(Item.Wallet())
+				.shape(new String[] { "***", "*^*", "***" })
+				.setIngredient('*', Material.LEATHER)
+				.setIngredient('^', Material.GOLD_NUGGET);
+		instance.getServer().addRecipe(wallet);
 	}
 
 	@Override

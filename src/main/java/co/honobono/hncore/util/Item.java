@@ -21,4 +21,13 @@ public class Item {
 		myitem.setItemMeta(im);
 		return myitem;
 	}
+
+	public static ItemStack Wallet() {
+		ItemStack i = new ItemStack(Material.LEATHER);
+		ItemMeta im =  i.getItemMeta();
+		i.setDurability((short) 1);
+		im.setDisplayName("§R§R§R§BWallet ( )");
+		i.setItemMeta(im);
+		return i;
+	}
 }

@@ -2,6 +2,7 @@ package co.honobono.hncore.util;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import net.minecraft.server.v1_8_R3.BlockPosition;
@@ -10,6 +11,7 @@ import net.minecraft.server.v1_8_R3.Packet;
 import net.minecraft.server.v1_8_R3.PacketPlayOutAnimation;
 import net.minecraft.server.v1_8_R3.PacketPlayOutBed;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
 
 
 public class sendPacket {
@@ -37,6 +39,11 @@ public class sendPacket {
 
 	public static PacketPlayOutAnimation Animation(Player player, int animation) {
 		PacketPlayOutAnimation packet = new PacketPlayOutAnimation(((CraftPlayer)player).getHandle(), animation);
+		return packet;
+	}
+
+	public static PacketPlayOutEntityDestroy EntityDestory(Entity e) {
+		PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(e.getEntityId());
 		return packet;
 	}
 }
