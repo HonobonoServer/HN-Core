@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 
 import org.bukkit.Achievement;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -66,15 +67,15 @@ public class Other {
 	 * @param text
 	 *            置き換える文章を指定します。
 	 * @param player
-	 *            playerがあった場合、playerより名前を取得後置き換えます。
+	 *            playerがあった場合、playerより名前を取得後置き換えます。 playerがnullの場合には変換しません。
 	 * @return &(0-9a-fk-or) と playerを置き換えたメッセージを返します。
 	 */
 	public static String color(String text, Player player) {
 		if (player != null) {
 			text = text.replaceAll("<player>", player.getName());
 		}
-		text = text.replaceAll("&([0-9a-fk-or])", "§" + "$1");
-		return text;
+		//text = text.replaceAll("&([0-9a-fk-or])", "§" + "$1");
+		return ChatColor.translateAlternateColorCodes('&', text);
 	}
 
 	/**
@@ -219,7 +220,7 @@ public class Other {
 		achievements.put("KILL_COW", "牛転がし");
 		achievements.put("KILL_ENEMY", "モンスターハンター");
 		achievements.put("KILL_WITHER", "はじまり。");
-		achievements.put("MAKE_BREAD", "パンを焼こう");
+		achievements.put("MAKE_BREAD", "パンを焼く");
 		achievements.put("MINE_WOOD", "木を手に入れる");
 		achievements.put("NETHER_PORTAL", "さらなる深みへ");
 		achievements.put("ON_A_RAIL", "線路の上で");

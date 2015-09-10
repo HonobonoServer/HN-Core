@@ -50,6 +50,7 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Wallet(), this);
 		getServer().getPluginManager().registerEvents(new test(), this);
 		getServer().getPluginManager().registerEvents(new Twitters(), this);
+		getServer().getPluginManager().registerEvents(new fishing(), this);
 
 		//財布レシピの追加
 		ShapedRecipe wallet = new ShapedRecipe(Item.Wallet())

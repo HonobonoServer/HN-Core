@@ -54,16 +54,6 @@ commands:
       usage: /<command>
       permission: hncore.test
       permission-message: Unknown command. Type "/help" for help.
-   wp:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.test
-      permission-message: Unknown command. Type "/help" for help.
-   light:
-      description: This is a admin command
-      usage: /<command>
-      permission: hncore.test
-      permission-message: Unknown command. Type "/help" for help.
    report:
       description: report
       usage: /<command> <player> <reason>
