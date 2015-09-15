@@ -1,39 +1,14 @@
 package co.honobono.hncore;
 
 import java.util.List;
-import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 
-import co.honobono.hncore.util.Other;
-import co.honobono.hncore.util.announceEvent;
-
-public class announce implements Listener, CommandExecutor {
+public class announce implements CommandExecutor {
 	private Plugin instance = HNCore.getInstance();
-	private int count = 0;
-
-	@EventHandler
-	public void Announce(announceEvent event) {
-		if (instance.getConfig().getBoolean("announcement.enable")) {
-			List<String> messages = instance.getConfig().getStringList("announcement.messages");
-			if (instance.getConfig().getBoolean("announcement.random") == true) {
-				count = new Random().nextInt(messages.size());
-			} else {
-				count++;
-				if (messages.size() <= count) {
-					count = 0;
-				}
-			}
-			String msg = Other.color(instance.getConfig().getString("announcement.prefix") + messages.get(count), null);
-			Bukkit.broadcastMessage(msg);
-		}
-	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {

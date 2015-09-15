@@ -14,14 +14,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerAchievementAwardedEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.Plugin;
 
 import co.honobono.hncore.util.Other;
 import co.honobono.hncore.util.TwitterUtil;
 import twitter4j.TwitterException;
 
 public class Twitters implements CommandExecutor, Listener {
-	// private Plugin instance = HNCore.getInstance();
+	private static Plugin instance = HNCore.getInstance();
 	private static String time = "\n" + Other.stamp();
 
 	@Override
@@ -66,7 +69,6 @@ public class Twitters implements CommandExecutor, Listener {
 		}
 	}
 
-	/*
 	@EventHandler
 	public void QuitPlayer(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
@@ -100,11 +102,10 @@ public class Twitters implements CommandExecutor, Listener {
 			e.printStackTrace();
 		}
 	}
-	*/
 
 	@EventHandler
 	public void Death(PlayerDeathEvent event) {
-		String msg = event.getDeathMessage();
+		String msg = event.getDeathMessage() + time;
 		String name = event.getEntity().getName();
 		Map<String, InputStream> map = new HashMap<String, InputStream>();
 		try {
@@ -114,6 +115,22 @@ public class Twitters implements CommandExecutor, Listener {
 		}
 		try {
 			TwitterUtil.tweet(msg, map);
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void runServer() {
+		try {
+			TwitterUtil.tweet("サーバーが起動しました！ サーバーアドレスは" + instance.getConfig().getString("Twitter.ServerIP") + "です");
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void closeServer() {
+		try {
+			TwitterUtil.tweet("サーバーが停止しました！ サーバーアドレスは" + instance.getConfig().getString("Twitter.ServerIP") + "です");
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}

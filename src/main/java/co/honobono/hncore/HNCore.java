@@ -18,6 +18,7 @@ public class HNCore extends JavaPlugin {
 		// 準備
 		instance = this;
 		getLogger().info("HN-Coreを起動しました");
+		//Twitters.runServer();
 		announce();
 		// config読み込み
 		this.saveDefaultConfig();
@@ -45,23 +46,22 @@ public class HNCore extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new sign(), this);
 		getServer().getPluginManager().registerEvents(new freeze(), this);
 		getServer().getPluginManager().registerEvents(new Chat(), this);
-		getServer().getPluginManager().registerEvents(new announce(), this);
 		getServer().getPluginManager().registerEvents(new ShowCommand(), this);
 		getServer().getPluginManager().registerEvents(new Wallet(), this);
 		getServer().getPluginManager().registerEvents(new test(), this);
 		getServer().getPluginManager().registerEvents(new Twitters(), this);
 		getServer().getPluginManager().registerEvents(new fishing(), this);
+		getServer().getPluginManager().registerEvents(new home(), this);
 
-		//財布レシピの追加
-		ShapedRecipe wallet = new ShapedRecipe(Item.Wallet())
-				.shape(new String[] { "***", "*^*", "***" })
-				.setIngredient('*', Material.LEATHER)
-				.setIngredient('^', Material.GOLD_NUGGET);
+		// 財布レシピの追加
+		ShapedRecipe wallet = new ShapedRecipe(Item.Wallet()).shape(new String[] { "***", "*^*", "***" })
+				.setIngredient('*', Material.LEATHER).setIngredient('^', Material.GOLD_NUGGET);
 		instance.getServer().addRecipe(wallet);
 	}
 
 	@Override
 	public void onDisable() {
+		//Twitters.closeServer();
 		getLogger().info("HN-Coreを終了しました");
 	}
 
