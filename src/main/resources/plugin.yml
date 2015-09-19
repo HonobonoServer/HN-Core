@@ -9,51 +9,61 @@ commands:
       usage: /<command> <ItemID> <meta>
       permission: hncore.get
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    show:
       description: This is a admin command
       usage: /<command>
       permission: hncore.show
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    hide:
       description: This is a admin command
       usage: /<command>
       permission: hncore.hide
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    mute:
       description: This is a admin command
       usage: /<command> <player>
       permission: hncore.mute
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    a:
       description: This is a admin command
       usage: /<command>
       permission: hncore.adminchat
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    al:
       description: This is a admin command
       usage: /<command> <range>
       permission: hncore.allremove
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    freeze:
       description: This is a admin command
       usage: /<command>
       permission: hncore.freeze
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    unfreeze:
       description: This is a admin command
       usage: /<command>
       permission: hncore.unfreeze
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    hnannounce:
       description: This is a admin command
       usage: /<command>
       permission: hncore.hnannounce
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    test:
       description: This is a admin command
       usage: /<command>
       permission: hncore.test
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    report:
       description: report
       usage: /<command> <player> <reason>
@@ -64,6 +74,7 @@ commands:
       usage: /<command> (player)
       permission: hncore.hnlook
       permission-message: Unknown command. Type "/help" for help.
+      default: op
    home:
       description: home
       usage: /<command> (player)
@@ -74,3 +85,4 @@ commands:
       usage: /<command> (message)
       permission: hncore.tweet
       permission-message: Unknown command. Type "/help" for help.
+      default: op
