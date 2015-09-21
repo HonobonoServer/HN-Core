@@ -3,6 +3,7 @@ package co.honobono.hncore;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,13 +15,13 @@ import org.bukkit.plugin.Plugin;
 
 import co.honobono.hncore.util.sendPacket;
 
-public class freeze implements CommandExecutor,Listener{
+public class freeze implements CommandExecutor, Listener {
 	private Plugin instance = HNCore.getInstance();
-	private static List<Player> freezer= new ArrayList<Player>();
+	private static List<Player> freezer = new ArrayList<Player>();
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		if(cmd.getName().equalsIgnoreCase("freeze")){
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		if (cmd.getName().equalsIgnoreCase("freeze")) {
 			if (args.length == 1) {
 				Player player = instance.getServer().getPlayer(args[0]);
 				freezer.add(player);
@@ -28,8 +29,8 @@ public class freeze implements CommandExecutor,Listener{
 				return true;
 			}
 			return false;
-		} else if(cmd.getName().equalsIgnoreCase("unfreeze")){
-			if(args.length == 1) {
+		} else if (cmd.getName().equalsIgnoreCase("unfreeze")) {
+			if (args.length == 1) {
 				Player player = instance.getServer().getPlayer(args[0]);
 				freezer.remove(player);
 				sendPacket.sendActionBar((Player) sender, "§a" + player.getName() + "をUnFreezeしました");
@@ -43,7 +44,15 @@ public class freeze implements CommandExecutor,Listener{
 
 	@EventHandler
 	public void moveoff(PlayerMoveEvent event) {
-		if(freezer.contains(event.getPlayer())) {
+		Player player = event.getPlayer();
+		if (freezer.contains(player)) {
+			Location from = event.getFrom();
+			Location to = event.getTo();
+			if(from.getBlockX() == to.getBlockX() &&
+					from.getBlockZ() == to.getBlockZ()) {
+				return;
+			}
+			player.teleport(from);
 			event.setCancelled(true);
 		}
 	}
