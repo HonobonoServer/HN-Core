@@ -30,52 +30,37 @@ public class DustBox implements Listener{
 	}
 
 	private static boolean Relative(Block block) {
-		Sign sign;
 		BlockFace bf = BlockFace.UP;
 		Block b = block.getRelative(bf);
-		if(Other.include(b.getType(), Material.SIGN, Material.SIGN_POST, Material.WALL_SIGN)) {
-			sign = ((Sign)b.getState());
-			for(String line : sign.getLines()) {
-				if(line.equalsIgnoreCase("[DustBox]")) {
-					return true;
-				}
-			}
+		if(is(b)) {
+			return true;
 		}
 		bf = BlockFace.EAST;
 		b = block.getRelative(bf);
-		if(Other.include(b.getType(), Material.SIGN, Material.SIGN_POST, Material.WALL_SIGN)) {
-			sign = ((Sign)b.getState());
-			for(String line : sign.getLines()) {
-				if(line.equalsIgnoreCase("[DustBox]")) {
-					return true;
-				}
-			}
+		if(is(b)) {
+			return true;
 		}
 		bf = BlockFace.NORTH;
 		b = block.getRelative(bf);
-		if(Other.include(b.getType(), Material.SIGN, Material.SIGN_POST, Material.WALL_SIGN)) {
-			sign = ((Sign)b.getState());
-			for(String line : sign.getLines()) {
-				if(line.equalsIgnoreCase("[DustBox]")) {
-					return true;
-				}
-			}
+		if(is(b)) {
+			return true;
 		}
 		bf = BlockFace.SOUTH;
 		b = block.getRelative(bf);
-		if(Other.include(b.getType(), Material.SIGN, Material.SIGN_POST, Material.WALL_SIGN)) {
-			sign = ((Sign)b.getState());
-			for(String line : sign.getLines()) {
-				if(line.equalsIgnoreCase("[DustBox]")) {
-					return true;
-				}
-			}
+		if(is(b)) {
+			return true;
 		}
 		bf = BlockFace.WEST;
 		b = block.getRelative(bf);
+		if(is(b)) {
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean is(Block b) {
 		if(Other.include(b.getType(), Material.SIGN, Material.SIGN_POST, Material.WALL_SIGN)) {
-			sign = ((Sign)b.getState());
-			for(String line : sign.getLines()) {
+			for(String line : ((Sign)b.getState()).getLines()) {
 				if(line.equalsIgnoreCase("[DustBox]")) {
 					return true;
 				}

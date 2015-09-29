@@ -26,6 +26,12 @@ LoginMessage:
  #サーバーを出た時に表示されるメッセージを表示します
  LogoutMessage: "&e<player>様がログアウトしました"
 
+#<ItemID>:<meta>:<amount>の順で入力します。また<meta>, <amount>がない場合0, 1が入ります。
+LoginBonus:
+ - 264
+ - 264:1
+ - 264:2:1
+
 #サーバーの説明欄をランダムで変更します また\nを入れると改行となります
 Motd:
  - "&bTest1!"

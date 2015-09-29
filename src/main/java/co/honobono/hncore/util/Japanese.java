@@ -549,7 +549,7 @@ public class Japanese {
 	 * @param kana 元となるひらがな
 	 * @return カタカナの文字列
 	 */
-	private static String toKata(String kana) {
+	public static String toKata(String kana) {
 		StringBuffer sb = new StringBuffer(kana);
 		for (int i = 0; i < sb.length(); i++) {
 			char c = sb.charAt(i);

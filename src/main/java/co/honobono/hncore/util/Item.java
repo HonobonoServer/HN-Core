@@ -30,4 +30,13 @@ public class Item {
 		i.setItemMeta(im);
 		return i;
 	}
+
+	public static ItemStack WorkBench() {
+		ItemStack i = new ItemStack(Material.STICK);
+		ItemMeta im =  i.getItemMeta();
+		i.setDurability((short) 1);
+		im.setDisplayName("§R§R§RPocketWorkBench");
+		i.setItemMeta(im);
+		return i;
+	}
 }

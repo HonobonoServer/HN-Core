@@ -46,8 +46,9 @@ public class look implements CommandExecutor {
 			sender.sendMessage("経験値: " + ChatColor.GRAY + "オフラインのため参照できません");
 			sender.sendMessage("体力: " + ChatColor.GRAY + "オフラインのため参照できません");
 			sender.sendMessage("AllowFlight: " + ChatColor.GRAY + "オフラインのため参照できません");
-			sender.sendMessage("IPアドレス: " + ChatColor.GRAY + "オフラインのため参照できません");
 			sender.sendMessage("現在座標: " + ChatColor.GRAY + "オフラインのため参照できません");
+			sender.sendMessage("ホスト名: " + ChatColor.GRAY + "オフラインのため参照できません");
+			sender.sendMessage("IPアドレス: " + ChatColor.GRAY + "オフラインのため参照できません");
 		} else {
 			sender.sendMessage("名前: " + player1.getName());
 			sender.sendMessage("UUID: " + player1.getUniqueId());
@@ -55,8 +56,9 @@ public class look implements CommandExecutor {
 			sender.sendMessage("経験値: " + player1.getExpToLevel());
 			sender.sendMessage("体力: " + player1.getHealth() + "/" + player1.getMaxHealth());
 			sender.sendMessage("AllowFlight: " + player1.getAllowFlight());
-			sender.sendMessage("IPアドレス: " + player1.getAddress() + "(" + getLoc(player1.getAddress().toString()) + ")");
 			sender.sendMessage("現在座標: " + player1.getLocation().toString());
+			sender.sendMessage("ホスト名: " + player1.getAddress().getHostName());
+			sender.sendMessage("IPアドレス: " + player1.getAddress() + "(" + getLoc(player1.getAddress().toString()) + ")");
 		}
 		return true;
 	}

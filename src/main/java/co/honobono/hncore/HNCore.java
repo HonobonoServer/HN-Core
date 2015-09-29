@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
@@ -12,13 +13,14 @@ import co.honobono.hncore.util.announceEvent;
 
 public class HNCore extends JavaPlugin {
 	static Plugin instance;
+	private PluginManager pm = getServer().getPluginManager();
 
 	@Override
 	public void onEnable() {
 		// 準備
 		instance = this;
 		getLogger().info("HN-Coreを起動しました");
-		//Twitters.runServer();
+		Twitters.runServer();
 		announce();
 		// config読み込み
 		this.saveDefaultConfig();
@@ -38,31 +40,36 @@ public class HNCore extends JavaPlugin {
 		getCommand("tweet").setExecutor(new Twitters());
 		getCommand("test").setExecutor(new test());
 		// Listener
-		getServer().getPluginManager().registerEvents(new hnget(), this);
-		getServer().getPluginManager().registerEvents(new elevator(), this);
-		getServer().getPluginManager().registerEvents(new LoginMessage(), this);
-		getServer().getPluginManager().registerEvents(new ChangeMotd(), this);
-		getServer().getPluginManager().registerEvents(new adminchat(), this);
-		getServer().getPluginManager().registerEvents(new sign(), this);
-		getServer().getPluginManager().registerEvents(new freeze(), this);
-		getServer().getPluginManager().registerEvents(new Chat(), this);
-		getServer().getPluginManager().registerEvents(new ShowCommand(), this);
-		getServer().getPluginManager().registerEvents(new Wallet(), this);
-		getServer().getPluginManager().registerEvents(new test(), this);
-		getServer().getPluginManager().registerEvents(new Twitters(), this);
-		getServer().getPluginManager().registerEvents(new fishing(), this);
-		getServer().getPluginManager().registerEvents(new home(), this);
-		getServer().getPluginManager().registerEvents(new DustBox(), this);
+		pm.registerEvents(new hnget(), this);
+		pm.registerEvents(new elevator(), this);
+		pm.registerEvents(new LoginMessage(), this);
+		pm.registerEvents(new ChangeMotd(), this);
+		pm.registerEvents(new adminchat(), this);
+		pm.registerEvents(new sign(), this);
+		pm.registerEvents(new freeze(), this);
+		pm.registerEvents(new Chat(), this);
+		pm.registerEvents(new ShowCommand(), this);
+		pm.registerEvents(new Wallet(), this);
+		pm.registerEvents(new test(), this);
+		pm.registerEvents(new Twitters(), this);
+		pm.registerEvents(new fishing(), this);
+		pm.registerEvents(new home(), this);
+		pm.registerEvents(new Bomb(), this);
+		pm.registerEvents(new DustBox(), this);
+		pm.registerEvents(new PocketItem(), this);
 
 		// 財布レシピの追加
 		ShapedRecipe wallet = new ShapedRecipe(Item.Wallet()).shape(new String[] { "***", "*^*", "***" })
 				.setIngredient('*', Material.LEATHER).setIngredient('^', Material.GOLD_NUGGET);
 		instance.getServer().addRecipe(wallet);
+		ShapedRecipe workbench = new ShapedRecipe(Item.WorkBench()).shape(new String[] { "AW", "SA" })
+				.setIngredient('W', Material.WORKBENCH).setIngredient('S', Material.STICK);
+		this.getServer().addRecipe(workbench);
 	}
 
 	@Override
 	public void onDisable() {
-		//Twitters.closeServer();
+		Twitters.closeServer();
 		getLogger().info("HN-Coreを終了しました");
 	}
 
