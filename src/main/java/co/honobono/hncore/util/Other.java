@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.bukkit.Achievement;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -83,7 +85,7 @@ public class Other {
 	 *
 	 * @param text
 	 *            元の字列
-	 * @return 全角:true 半角:flase
+	 * @return 全角:true 半角:false
 	 */
 	public static boolean isZenkaku(String text) {
 		byte[] bytes = text.getBytes();
@@ -234,5 +236,25 @@ public class Other {
 
 	public static String AchievementtoJP(Achievement achieve) {
 		return achievements.get(achieve.name());
+	}
+
+	/**
+	 * Stringの配列からItemStackに変換します。
+	 * @param a Material.toString():Meta:Amountに整形された文字列
+	 * @return アイテムリスト
+	 */
+	public static List<ItemStack> toItemStack(List<String> a) {
+		List<ItemStack> b = new ArrayList<>();
+		for(String c : a) {
+			String[] d = c.split(":");
+			Material e = Material.getMaterial(d[0]);
+			Short f = Short.valueOf(d[1]);
+			int g = Integer.valueOf(d[2]);
+			ItemStack h = new ItemStack(e);
+			h.setDurability(f);
+			h.setAmount(g);
+			b.add(h);
+		}
+		return b;
 	}
 }

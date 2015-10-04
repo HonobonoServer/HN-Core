@@ -124,7 +124,7 @@ public class Twitters implements CommandExecutor, Listener {
 		try {
 			TwitterUtil.tweet("サーバーが起動しました！ サーバーアドレスは" + instance.getConfig().getString("Twitter.ServerIP") + "です");
 		} catch (TwitterException e) {
-			e.printStackTrace();
+			instance.getLogger().info("起動時のツイートが連続したためツイートされませんでした。");
 		}
 	}
 
@@ -132,7 +132,7 @@ public class Twitters implements CommandExecutor, Listener {
 		try {
 			TwitterUtil.tweet("サーバーが停止しました！ サーバーアドレスは" + instance.getConfig().getString("Twitter.ServerIP") + "です");
 		} catch (TwitterException e) {
-			e.printStackTrace();
+			instance.getLogger().info("停止時のツイートが連続したためツイートされませんでした。");
 		}
 	}
 }

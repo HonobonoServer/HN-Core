@@ -86,3 +86,9 @@ commands:
       permission: hncore.tweet
       permission-message: Unknown command. Type "/help" for help.
       default: op
+   bot:
+      description: bot
+      usage: /<command>
+      permission: hncore.bot
+      permission-message: Unknown command. Type "/help" for help.
+      default: op
