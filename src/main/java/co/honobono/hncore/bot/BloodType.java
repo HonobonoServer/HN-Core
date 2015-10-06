@@ -4,7 +4,8 @@ public enum BloodType {
 	A(1),
 	B(2),
 	O(3),
-	AB(4);
+	AB(4),
+	NONE(5);
 
 	private final int id;
 
@@ -16,7 +17,7 @@ public enum BloodType {
 		return id;
 	}
 
-	public BloodType getBloodType(int id) {
+	public static BloodType getBloodType(int id) {
 		for(BloodType b : values()) {
 			if(b.getId() == id) {
 				return b;

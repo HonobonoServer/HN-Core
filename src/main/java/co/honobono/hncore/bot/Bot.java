@@ -9,13 +9,13 @@ public class Bot {
 	private String context = "";
 	private String NickName = "";
 	private String NickNameY = "";
-	private Sex sex = null;
-	private BloodType bloodtype = null;
+	private Sex sex = Sex.NONE;
+	private BloodType bloodtype = BloodType.NONE;
 	private LocalDate birthday = null;
 	private int age = 0;
-	private Constellation constellation = null;
-	private String place = "東京";
-	private Mode mode = null;
+	private Constellation constellation = Constellation.NONE;
+	private String place = "";
+	private Mode mode = Mode.DIALOG;
 
 	public Bot(Player player, String context, String NickName, String NickNameY, Sex sex, BloodType bloodtype,
 			LocalDate birthday, int age, Constellation constellation, Mode mode) {

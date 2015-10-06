@@ -20,7 +20,7 @@ public enum Mode {
 		return name;
 	}
 
-	public Mode getMode(int id) {
+	public static Mode getMode(int id) {
 		for(Mode m : values()) {
 			if(m.getId() == id) {
 				return m;
@@ -29,7 +29,7 @@ public enum Mode {
 		throw new IllegalArgumentException("no such enum object for the id: " + id);
 	}
 
-	public Mode getMode(String name) {
+	public static Mode getMode(String name) {
 		for(Mode m : values()) {
 			if(m.getName().equals(name)) {
 				return m;

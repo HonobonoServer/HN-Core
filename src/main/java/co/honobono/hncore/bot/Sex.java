@@ -2,7 +2,8 @@ package co.honobono.hncore.bot;
 
 public enum Sex {
     MALE(1),
-    FEMALE(2);
+    FEMALE(2),
+    NONE(3);
 
 	private final int id;
 
@@ -14,7 +15,7 @@ public enum Sex {
 		return id;
 	}
 
-	public Sex getSex(int id) {
+	public static Sex getSex(int id) {
 		for(Sex s : values()) {
 			if(s.getId() == id) {
 				return s;
