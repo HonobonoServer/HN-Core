@@ -9,7 +9,7 @@ This software includes the work that is distributed in the Apache License 2.0, s
 このプラグインはHonobonoServer(hn-server.ddo.jp)用のpluginです。
 そのためソースはオープンソースとして管理しますがコンパイル後のjarファイルの二次配布は禁止とします。
 またこのプラグインはMaxMindDBを使用します。
-Pluginを起動後[http://dev.maxmind.com/ja/geolite2/]よりGeoLite2-City.mmdbをダウンロードし
+Pluginを起動後[ http://dev.maxmind.com/ja/geolite2/ ]よりGeoLite2-City.mmdbをダウンロードし
 plugin/HN-Core/MaxMindDB内に保存してください。
 またこのプラグインではTwitter4Jを使用しております。
 
