@@ -16,10 +16,30 @@ public class AddFood implements Listener {
 
 	private static Map<Material, Integer> food = new HashMap<>(); {
 		food.put(Material.APPLE, 4);
-		// food.put(Material.BAKED_POTATO, 5);
+		food.put(Material.BAKED_POTATO, 5);
 		food.put(Material.BREAD, 5);
-		// food.put(Material.CAKE, 2);
-		// food.put(Material.CARROT, 3);
+		food.put(Material.CAKE, 2);
+		food.put(Material.CARROT, 3);
+		food.put(Material.COOKED_CHICKEN, 6);
+		food.put(Material.COOKED_MUTTON, 6);
+		food.put(Material.GRILLED_PORK, 8);
+		food.put(Material.COOKED_RABBIT, 5);
+		food.put(Material.COOKIE, 2);
+		food.put(Material.GOLDEN_CARROT, 6);
+		food.put(Material.MELON, 2);
+		food.put(Material.MUSHROOM_SOUP, 6);
+		food.put(Material.POISONOUS_POTATO, 2);
+		food.put(Material.POTATO, 1);
+		food.put(Material.PUMPKIN_PIE, 8);
+		food.put(Material.RABBIT_STEW, 10);
+		food.put(Material.RAW_BEEF, 3);
+		food.put(Material.RAW_CHICKEN, 2);
+		food.put(Material.MUTTON, 2);
+		food.put(Material.PORK, 3);
+		food.put(Material.RABBIT, 3);
+		food.put(Material.ROTTEN_FLESH, 4);
+		food.put(Material.SPIDER_EYE, 2);
+		food.put(Material.COOKED_BEEF, 8);
 	}
 
 	private static Map<ItemStack, Integer> cfood = new HashMap<>();{

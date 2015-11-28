@@ -1,4 +1,5 @@
 This software is released under the MIT License, see LICENSE-MIT.md.
+
 This software includes the work that is distributed in the Apache License 2.0, see LICENSE-Apache.md.
 
 この製品には MaxMind が作成した GeoLite2 データが含まれており、
