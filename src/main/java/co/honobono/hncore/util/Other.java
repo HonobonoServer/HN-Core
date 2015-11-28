@@ -172,7 +172,7 @@ public class Other {
 	 * Location.toStringした値をLocationに戻します。
 	 *
 	 * @param s
-	 *            LyoStringした値
+	 *            toStringした値
 	 * @return 復元したLocation
 	 */
 	public static Location toLocation(String s) {
@@ -256,5 +256,16 @@ public class Other {
 			b.add(h);
 		}
 		return b;
+	}
+
+	/**
+	 * Class typeの型にObject objをcastします
+	 * @param obj
+	 * @param type
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T as(Object obj, Class<T> type) {
+		  return (type.isInstance(obj) ? (T)obj : null);
 	}
 }

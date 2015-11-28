@@ -15,13 +15,14 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 
 public class TwitterUtil {
-	private final static String ConsumerKey = "";
-	private final static String ConsumerSecret = "";
-	private final static String AccessToken = "";
-	private final static String AccessTokenSecret = "";
+	private final static String ConsumerKey = "iOJMwmxnwN72hDRTM2gXdOzTH";
+	private final static String ConsumerSecret = "t8OK4Nyq37tQFO3imTAZmngFecHkMpA2Fa5ks8TKldKfuyGNae";
+	private final static String AccessToken = "3221242914-oCpruZY4IpaCKae8QF5D5zC898fpxUnFJTXsiiJ";
+	private final static String AccessTokenSecret = "NZ3xhVyyoGZ18CZo2esMBShjlzicjtRn17NvnzKM5sHHY";
 	private static TwitterFactory twitterfactory = new TwitterFactory();
 	private static AccessToken accesstoken = new AccessToken(AccessToken, AccessTokenSecret);
 	private static Twitter twitter = twitterfactory.getInstance();
+
 	static {
 		twitter.setOAuthConsumer(ConsumerKey, ConsumerSecret);
 		twitter.setOAuthAccessToken(accesstoken);
@@ -32,12 +33,12 @@ public class TwitterUtil {
 	}
 
 	public static void tweet(String msg, File... picture) throws TwitterException {
-		if(picture.length > 5) {
+		if (picture.length > 5) {
 			throw new TwitterException("写真は5枚までです。");
 		}
 		long[] mediaIDs = new long[5];
 		for (int i = 0; i < mediaIDs.length; i++) {
-			if(picture[i] != null) {
+			if (picture[i] != null) {
 				mediaIDs[i] = twitter.uploadMedia(picture[i]).getMediaId();
 			}
 		}
@@ -47,17 +48,16 @@ public class TwitterUtil {
 	}
 
 	public static void tweet(String msg, Map<String, InputStream> picture) throws TwitterException {
-		if(picture.size() > 5) {
+		if (picture.size() > 5) {
 			throw new TwitterException("写真は5枚までです。");
 		}
 		List<Long> mediaIDs = new ArrayList<Long>();
-		for(Map.Entry<String, InputStream> e : picture.entrySet()) {
+		for (Map.Entry<String, InputStream> e : picture.entrySet()) {
 			mediaIDs.add(twitter.uploadMedia(e.getKey(), e.getValue()).getMediaId());
 		}
 		StatusUpdate update = new StatusUpdate(msg);
 		update.setMediaIds(tolong(mediaIDs));
 		twitter.updateStatus(update);
-
 	}
 
 	public static void Followback() throws TwitterException {
@@ -98,4 +98,16 @@ public class TwitterUtil {
 		}
 		return list;
 	}
+
+	public static void Update(StatusUpdate update) throws TwitterException {
+		new Thread() {
+			@Override
+			public void run() {
+				try {
+					twitter.updateStatus(update);
+				} catch (TwitterException e) { }
+			}
+		}.start();
+	}
 }
+
