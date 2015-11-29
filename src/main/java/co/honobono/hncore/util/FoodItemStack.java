@@ -18,7 +18,7 @@ public class FoodItemStack {
 
 	@Override
 	public String toString() {
-		return "FoodItemStack [Item=" + Item + ", FoodLevel=" + FoodLevel + ", potions=" + potions + "]";
+		return "FoodItemStack [Item=" + Item + ", Meta=" + Item.getDurability() + ", FoodLevel=" + FoodLevel + ", potions=" + potions + "]";
 	}
 
 	public ItemStack getItem() {

@@ -17,7 +17,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import co.honobono.hncore.util.FoodItemStack;
 
-@SuppressWarnings("unchecked")
 public class AddFood implements Listener {
 	// private static Plugin instance = HNCore.getInstance();
 
@@ -51,31 +50,32 @@ public class AddFood implements Listener {
 
 	public static List<FoodItemStack> cfood = new ArrayList<>();{
 		FileConfiguration f = HNCore.Food.get();
-		Map<String, List<Map<String, Object>>> map = (Map<String, List<Map<String, Object>>>) f.get("Food"); // ここでmemorysectionが帰ってきてダメになる
-		for(Map.Entry<String, List<Map<String, Object>>> e : map.entrySet()) {
-			for(Map<String, Object> map1 : e.getValue()) {
-				ItemStack item = Build(e.getKey(), map1.get("Meta"));
-				int food = (int)map1.get("Food");
+		for(Map.Entry<Material, Integer> e : food.entrySet()) {
+			for(Map<?, ?> m : f.getMapList("Food." + e.getKey().name())) {
+				ItemStack i = Build(e.getKey(), m.get("Meta"));
+				int foodlevel = ((Integer)m.get("Food"));
 				List<PotionEffect> p = new ArrayList<>();
-				if(map1.get("Effect") != null) {
-					for(String s : (List<String>)map1.get("Effect")) {
-						String[] s1 = s.split(":");
-						p.add(new PotionEffect(PotionEffectType.getByName(s1[0]), Integer.valueOf(s1[1]), Integer.valueOf(s1[2])));
-					}
+				@SuppressWarnings("unchecked")
+				List<String> s = (List<String>)m.get("Effect");
+				if(s != null) {
+				for(String potion : s) {
+					String[] s1 = potion.split(":");
+					p.add(new PotionEffect(PotionEffectType.getByName(s1[0]), Integer.valueOf(s1[1]), Integer.valueOf(s1[2])));
 				}
-				cfood.add(new FoodItemStack(item, food, p));
+				} else {
+					s = new ArrayList<>();
+				}
+				cfood.add(new FoodItemStack(i, foodlevel, p));
 			}
 		}
 	}
-	private static ItemStack Build(String material, Object Durability) {
-		ItemStack i = new ItemStack(Material.getMaterial(material));
-		i.setDurability((short) Durability);
+	private static ItemStack Build(Material material, Object Durability) {
+		ItemStack i = new ItemStack(material);
+		i.setDurability((Durability instanceof Integer) ? ((Integer)Durability).shortValue() : 0);
 		return i;
 	}
 	private FoodItemStack getFood(ItemStack i) {
-		for(FoodItemStack fi : cfood) {
-			if(fi.getItem() == i) return fi;
-		}
+		for(FoodItemStack fi : cfood) if(fi.getItem().getType() == i.getType() && fi.getItem().getDurability() == i.getDurability()) return fi;
 		return null;
 	}
 
@@ -85,7 +85,8 @@ public class AddFood implements Listener {
 		FoodItemStack food1 = getFood(im);
 		if(food1 == null) return;
 		Player player = event.getPlayer();
-		player.setFoodLevel(player.getFoodLevel() + (food1.getFoodLevel() - food.get(im.getType())));
+		int pluslevel = food1.getFoodLevel() - food.get(im.getType());
+		player.setFoodLevel(player.getFoodLevel() + pluslevel);
 		player.addPotionEffects(food1.getPotions());
 	}
 }

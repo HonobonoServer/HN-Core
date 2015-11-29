@@ -1,14 +1,12 @@
 Food:
-  APLLE:
+  APPLE:
    - Meta: 1
-     Food: 6
+     Food: 20
      Effect:
-      - SLOW:1:1
+      - SPEED:100:100
    - Meta: 2
      Food: 8
   BAKED_POTATO:
-   - Meta: 1
-     Food: 9
   BREAD:
   CAKE:
   CARROT:
