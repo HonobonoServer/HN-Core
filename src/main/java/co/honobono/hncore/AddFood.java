@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -52,7 +51,7 @@ public class AddFood implements Listener {
 
 	public static List<FoodItemStack> cfood = new ArrayList<>();{
 		FileConfiguration f = HNCore.Food.get();
-		Map<String, List<Map<String, Object>>> map = (Map<String, List<Map<String, Object>>>) f.get("Food");
+		Map<String, List<Map<String, Object>>> map = (Map<String, List<Map<String, Object>>>) f.get("Food"); // ここでmemorysectionが帰ってきてダメになる
 		for(Map.Entry<String, List<Map<String, Object>>> e : map.entrySet()) {
 			for(Map<String, Object> map1 : e.getValue()) {
 				ItemStack item = Build(e.getKey(), map1.get("Meta"));
@@ -65,7 +64,6 @@ public class AddFood implements Listener {
 					}
 				}
 				cfood.add(new FoodItemStack(item, food, p));
-				Bukkit.broadcastMessage("追加！");
 			}
 		}
 	}
