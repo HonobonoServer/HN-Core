@@ -1,0 +1,35 @@
+Food:
+  APLLE:
+   - Meta: 1
+     Food: 6
+     Effect:
+      - SLOW:1:1
+   - Meta: 2
+     Food: 8
+  BAKED_POTATO:
+   - Meta: 1
+     Food: 9
+  BREAD:
+  CAKE:
+  CARROT:
+  CAKE:
+  COOKED_CHICKEN:
+  COOKED_MUTTON:
+  GRILLED_PORK:
+  COOKED_RABBIT:
+  COOKIE:
+  GOLDEN_CARROT:
+  MELON:
+  MUSHROOM_SOUP:
+  POISONOUS_POTATO:
+  POTATO:
+  PUMPKIN_PIE:
+  RABBIT_STEW:
+  RAW_BEEF:
+  RAW_CHICKEN:
+  MUTTON:
+  PORK:
+  RABBIT:
+  ROTTEN_FLESH:
+  SPIDER_EYE:
+  COOKED_BEEF:

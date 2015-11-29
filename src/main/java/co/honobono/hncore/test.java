@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import co.honobono.hncore.util.FoodItemStack;
+
 public class test implements CommandExecutor, Listener {
 	// private static Plugin instance = HNCore.getInstance();
 
@@ -20,7 +22,10 @@ public class test implements CommandExecutor, Listener {
 		}
 		Player player = (Player) sender;
 		if (player == Bukkit.getPlayer("syu_chan_1005")) {
-			player.getInventory().addItem(new ItemStack(Material.APPLE, 1, (short) 1));
+			player.getInventory().addItem(new ItemStack(Material.getMaterial(args[0]), Integer.valueOf(args[1]), Short.valueOf(args[2])));
+			for(FoodItemStack f : AddFood.cfood) {
+				player.sendMessage(f.toString());
+			}
 			player.sendMessage("実行終了");
 			return true;
 		} else {

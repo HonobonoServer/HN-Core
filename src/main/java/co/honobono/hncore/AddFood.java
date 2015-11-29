@@ -1,18 +1,26 @@
 package co.honobono.hncore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
+import co.honobono.hncore.util.FoodItemStack;
+
+@SuppressWarnings("unchecked")
 public class AddFood implements Listener {
-	private static Plugin instance = HNCore.getInstance();
+	// private static Plugin instance = HNCore.getInstance();
 
 	private static Map<Material, Integer> food = new HashMap<>(); {
 		food.put(Material.APPLE, 4);
@@ -42,25 +50,44 @@ public class AddFood implements Listener {
 		food.put(Material.COOKED_BEEF, 8);
 	}
 
-	private static Map<ItemStack, Integer> cfood = new HashMap<>();{
-		String s1[];
-		for(String str : instance.getConfig().getStringList("Food")) {
-			s1 = str.split(":");
-			cfood.put(Build(s1[0], s1[1]), Integer.valueOf(s1[2]));
+	public static List<FoodItemStack> cfood = new ArrayList<>();{
+		FileConfiguration f = HNCore.Food.get();
+		Map<String, List<Map<String, Object>>> map = (Map<String, List<Map<String, Object>>>) f.get("Food");
+		for(Map.Entry<String, List<Map<String, Object>>> e : map.entrySet()) {
+			for(Map<String, Object> map1 : e.getValue()) {
+				ItemStack item = Build(e.getKey(), map1.get("Meta"));
+				int food = (int)map1.get("Food");
+				List<PotionEffect> p = new ArrayList<>();
+				if(map1.get("Effect") != null) {
+					for(String s : (List<String>)map1.get("Effect")) {
+						String[] s1 = s.split(":");
+						p.add(new PotionEffect(PotionEffectType.getByName(s1[0]), Integer.valueOf(s1[1]), Integer.valueOf(s1[2])));
+					}
+				}
+				cfood.add(new FoodItemStack(item, food, p));
+				Bukkit.broadcastMessage("追加！");
+			}
 		}
+	}
+	private static ItemStack Build(String material, Object Durability) {
+		ItemStack i = new ItemStack(Material.getMaterial(material));
+		i.setDurability((short) Durability);
+		return i;
+	}
+	private FoodItemStack getFood(ItemStack i) {
+		for(FoodItemStack fi : cfood) {
+			if(fi.getItem() == i) return fi;
+		}
+		return null;
 	}
 
 	@EventHandler
 	public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
 		ItemStack im = event.getItem();
-		if(!cfood.containsKey(im)) return;
+		FoodItemStack food1 = getFood(im);
+		if(food1 == null) return;
 		Player player = event.getPlayer();
-		player.setFoodLevel(player.getFoodLevel() + (cfood.get(im) - food.get(im.getType())));
-	}
-
-	private static ItemStack Build(String material, String Durability) {
-		ItemStack i = new ItemStack(Material.getMaterial(material));
-		i.setDurability(Short.valueOf(Durability));
-		return i;
+		player.setFoodLevel(player.getFoodLevel() + (food1.getFoodLevel() - food.get(im.getType())));
+		player.addPotionEffects(food1.getPotions());
 	}
 }

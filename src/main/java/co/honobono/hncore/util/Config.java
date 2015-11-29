@@ -19,20 +19,19 @@ public class Config {
 	private File config = null;
 	private FileConfiguration f = null;
 
-	public Config(String filename) {
+	public Config(String filename) throws IOException {
 		this.name = filename;
 		this.config = new File(instance.getDataFolder(), this.name);
-	}
-
-	public void create() {
+		InputStream im = null;
+		OutputStream os = null;
 		try {
 			if (!this.config.exists()) {
 				this.config.createNewFile();
-				InputStream im = instance.getResource(this.name);
+				im = instance.getResource(this.name);
 				if(im == null) {
 					return;
 				}
-				OutputStream os = new FileOutputStream(this.config);
+				os = new FileOutputStream(this.config);
 				int c = 0;
 				while ((c = im.read()) != -1) {
 					os.write(c);
@@ -40,8 +39,9 @@ public class Config {
 				im.close();
 				os.close();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} finally {
+			if(im != null) im.close();
+			if(os != null) os.close();
 		}
 	}
 
@@ -55,6 +55,7 @@ public class Config {
 		return f;
 	}
 
+	@Deprecated
 	public void save() {
 		try {
 			f.save(config);
