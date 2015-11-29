@@ -34,7 +34,7 @@ commands:
       permission: hncore.adminchat
       permission-message: Unknown command. Type "/help" for help.
       default: op
-   al:
+   remove:
       description: This is a admin command
       usage: /<command> <range>
       permission: hncore.allremove

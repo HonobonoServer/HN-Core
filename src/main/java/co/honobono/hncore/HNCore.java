@@ -33,12 +33,12 @@ public class HNCore extends JavaPlugin {
 		getCommand("show").setExecutor(new show_hide());
 		getCommand("hide").setExecutor(new show_hide());
 		getCommand("mute").setExecutor(new mute());
-		getCommand("al").setExecutor(new itemremove()); // 消すエンティティの選択
+		getCommand("remove").setExecutor(new ItemRemove()); // 消すエンティティの選択
 		getCommand("freeze").setExecutor(new freeze());
 		getCommand("unfreeze").setExecutor(new freeze());
 		getCommand("report").setExecutor(new report());
 		getCommand("hnlook").setExecutor(new look());
-		getCommand("home").setExecutor(new home()); // 10sec
+		getCommand("home").setExecutor(new home());
 		getCommand("food").setExecutor(new AddFood());
 		getCommand("test").setExecutor(new test());
 		// Listener
