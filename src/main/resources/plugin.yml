@@ -86,9 +86,9 @@ commands:
       permission: hncore.tweet
       permission-message: Unknown command. Type "/help" for help.
       default: op
-   bot:
-      description: bot
-      usage: /<command>
-      permission: hncore.bot
+   food:
+      description: food
+      usage: /<command> reload
+      permission: hncore.food
       permission-message: Unknown command. Type "/help" for help.
       default: op

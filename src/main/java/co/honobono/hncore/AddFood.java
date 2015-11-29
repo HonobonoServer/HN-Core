@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import co.honobono.hncore.util.FoodItemStack;
 
-public class AddFood implements Listener {
+public class AddFood implements Listener, CommandExecutor{
 	// private static Plugin instance = HNCore.getInstance();
 
 	private static Map<Material, Integer> food = new HashMap<>(); {
@@ -49,6 +52,9 @@ public class AddFood implements Listener {
 	}
 
 	public static List<FoodItemStack> cfood = new ArrayList<>();{
+		loadConfig();
+	}
+	private static void loadConfig() {
 		FileConfiguration f = HNCore.Food.get();
 		for(Map.Entry<Material, Integer> e : food.entrySet()) {
 			for(Map<?, ?> m : f.getMapList("Food." + e.getKey().name())) {
@@ -88,5 +94,16 @@ public class AddFood implements Listener {
 		int pluslevel = food1.getFoodLevel() - food.get(im.getType());
 		player.setFoodLevel(player.getFoodLevel() + pluslevel);
 		player.addPotionEffects(food1.getPotions());
+	}
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if(args.length != 1) return false;
+		switch(args[0].toUpperCase()) {
+		case "RELOAD":
+			loadConfig();
+			sender.sendMessage("Reloadしました");
+			return true;
+		}
+		return false;
 	}
 }

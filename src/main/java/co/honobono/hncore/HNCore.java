@@ -39,6 +39,7 @@ public class HNCore extends JavaPlugin {
 		getCommand("report").setExecutor(new report());
 		getCommand("hnlook").setExecutor(new look());
 		getCommand("home").setExecutor(new home()); // 10sec
+		getCommand("food").setExecutor(new AddFood());
 		getCommand("test").setExecutor(new test());
 		// Listener
 		pm.registerEvents(new Get(), this);
