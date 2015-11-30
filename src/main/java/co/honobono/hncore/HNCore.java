@@ -22,7 +22,7 @@ public class HNCore extends JavaPlugin {
 		instance = this;
 		getLogger().info("HN-Coreを起動しました");
 		try {
-			Food = new Config("food.yml");
+			Food = new Config("food.yml", this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -33,7 +33,7 @@ public class HNCore extends JavaPlugin {
 		getCommand("show").setExecutor(new show_hide());
 		getCommand("hide").setExecutor(new show_hide());
 		getCommand("mute").setExecutor(new mute());
-		getCommand("remove").setExecutor(new ItemRemove()); // 消すエンティティの選択
+		getCommand("remove").setExecutor(new ItemRemove());
 		getCommand("freeze").setExecutor(new freeze());
 		getCommand("unfreeze").setExecutor(new freeze());
 		getCommand("report").setExecutor(new report());
@@ -60,7 +60,6 @@ public class HNCore extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		// Twitters.closeServer();
 		getLogger().info("HN-Coreを終了しました");
 	}
 

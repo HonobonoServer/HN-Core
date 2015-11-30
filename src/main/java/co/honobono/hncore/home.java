@@ -11,7 +11,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class home implements CommandExecutor, Listener {
 	private static Plugin instance = HNCore.getInstance();
-	private int time = 10;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -22,13 +21,13 @@ public class home implements CommandExecutor, Listener {
 		Player player = (Player) sender;
 		if (args.length == 0) {
 			Location bed = player.getBedSpawnLocation();
-			time = 10;
 			if (bed != null) {
 				Location loc1 = player.getLocation();
 				new BukkitRunnable(){
+					int time = 10;
 					@Override
 					public void run() {
-						player.sendMessage("テレポートまで残り" + time + "秒...");
+						if(time == 10 || time <= 4) player.sendMessage("テレポートまで残り" + time + "秒...");
 						time--;
 						if(loc1.getBlockX() != player.getLocation().getBlockX() || loc1.getBlockZ() != player.getLocation().getBlockZ()) {
 							player.sendMessage("動いたため中止します...");

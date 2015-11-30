@@ -11,16 +11,15 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import co.honobono.hncore.HNCore;
-
 public class Config {
-	private Plugin instance = HNCore.getInstance();
+	private Plugin instance;
 	private String name = "";
 	private File config = null;
 	private FileConfiguration f = null;
 
-	public Config(String filename) throws IOException {
+	public Config(String filename, Plugin plugin) throws IOException {
 		this.name = filename;
+		this.instance = plugin;
 		this.config = new File(instance.getDataFolder(), this.name);
 		InputStream im = null;
 		OutputStream os = null;

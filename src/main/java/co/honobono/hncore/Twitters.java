@@ -1,3 +1,4 @@
+/*
 package co.honobono.hncore;
 
 import java.io.IOException;
@@ -136,3 +137,4 @@ public class Twitters implements CommandExecutor, Listener {
 		}
 	}
 }
+*/
