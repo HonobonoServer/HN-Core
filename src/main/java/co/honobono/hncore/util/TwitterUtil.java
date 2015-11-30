@@ -1,3 +1,4 @@
+/*
 package co.honobono.hncore.util;
 
 import java.io.File;
@@ -15,10 +16,10 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 
 public class TwitterUtil {
-	private final static String ConsumerKey = "iOJMwmxnwN72hDRTM2gXdOzTH";
-	private final static String ConsumerSecret = "t8OK4Nyq37tQFO3imTAZmngFecHkMpA2Fa5ks8TKldKfuyGNae";
-	private final static String AccessToken = "3221242914-oCpruZY4IpaCKae8QF5D5zC898fpxUnFJTXsiiJ";
-	private final static String AccessTokenSecret = "NZ3xhVyyoGZ18CZo2esMBShjlzicjtRn17NvnzKM5sHHY";
+	private final static String ConsumerKey = "";
+	private final static String ConsumerSecret = "";
+	private final static String AccessToken = "";
+	private final static String AccessTokenSecret = "";
 	private static TwitterFactory twitterfactory = new TwitterFactory();
 	private static AccessToken accesstoken = new AccessToken(AccessToken, AccessTokenSecret);
 	private static Twitter twitter = twitterfactory.getInstance();
@@ -111,3 +112,4 @@ public class TwitterUtil {
 	}
 }
 
+*/
