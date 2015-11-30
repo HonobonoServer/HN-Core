@@ -17,7 +17,7 @@ public class Config {
 	private File config = null;
 	private FileConfiguration f = null;
 
-	public Config(String filename, Plugin plugin) throws IOException {
+	public Config(String filename, Plugin plugin) throws IOException, InvalidConfigurationException {
 		this.name = filename;
 		this.instance = plugin;
 		this.config = new File(instance.getDataFolder(), this.name);
@@ -27,7 +27,7 @@ public class Config {
 			if (!this.config.exists()) {
 				this.config.createNewFile();
 				im = instance.getResource(this.name);
-				if(im == null) {
+				if (im == null) {
 					return;
 				}
 				os = new FileOutputStream(this.config);
@@ -39,27 +39,21 @@ public class Config {
 				os.close();
 			}
 		} finally {
-			if(im != null) im.close();
-			if(os != null) os.close();
+			if (im != null)
+				im.close();
+			if (os != null)
+				os.close();
 		}
+		this.f = new YamlConfiguration();
+		f.load(this.config);
 	}
 
 	public FileConfiguration get() {
-		this.f = new YamlConfiguration();
-		try {
-			f.load(this.config);
-		} catch (IOException | InvalidConfigurationException e) {
-			e.printStackTrace();
-		}
 		return f;
 	}
 
 	@Deprecated
-	public void save() {
-		try {
-			f.save(config);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void save() throws IOException {
+		f.save(config);
 	}
 }

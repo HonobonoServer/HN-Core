@@ -3,6 +3,7 @@ package co.honobono.hncore;
 import java.io.IOException;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -23,7 +24,7 @@ public class HNCore extends JavaPlugin {
 		getLogger().info("HN-Coreを起動しました");
 		try {
 			Food = new Config("food.yml", this);
-		} catch (IOException e) {
+		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
 		// config読み込み
