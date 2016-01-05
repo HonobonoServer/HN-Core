@@ -572,8 +572,7 @@ public class Japanese {
 	public static String toIME(String kana) {
 		URL url;
 		try {
-			url = new URL(
-					"http://google.co.jp/transliterate?langpair=ja-Hira%7cja&text=" + URLEncoder.encode(kana, "UTF8"));
+			url = new URL("http://google.co.jp/transliterate?langpair=ja-Hira%7cja&text=" + URLEncoder.encode(kana, "UTF8"));
 			InputStream in = url.openStream();
 			try {
 				BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF8"));

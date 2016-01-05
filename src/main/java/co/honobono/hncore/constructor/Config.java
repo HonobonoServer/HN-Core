@@ -1,4 +1,4 @@
-package co.honobono.hncore.util;
+package co.honobono.hncore.constructor;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,7 +52,7 @@ public class Config {
 		return f;
 	}
 
-	@Deprecated
+	// @Deprecated
 	public void save() throws IOException {
 		f.save(config);
 	}

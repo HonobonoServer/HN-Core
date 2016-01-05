@@ -1,4 +1,4 @@
-package co.honobono.hncore.util;
+package co.honobono.hncore.constructor;
 
 import java.util.List;
 

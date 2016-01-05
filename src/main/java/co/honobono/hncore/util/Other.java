@@ -73,10 +73,7 @@ public class Other {
 	 * @return &(0-9a-fk-or) と playerを置き換えたメッセージを返します。
 	 */
 	public static String color(String text, Player player) {
-		if (player != null) {
-			text = text.replaceAll("<player>", player.getName());
-		}
-		//text = text.replaceAll("&([0-9a-fk-or])", "§" + "$1");
+		if (player != null) text = text.replaceAll("<player>", player.getName());
 		return ChatColor.translateAlternateColorCodes('&', text);
 	}
 

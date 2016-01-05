@@ -9,25 +9,24 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import co.honobono.hncore.util.Config;
+import co.honobono.hncore.constructor.Config;
 import co.honobono.hncore.util.Item;
 
 public class HNCore extends JavaPlugin {
 	static Plugin instance;
 	private PluginManager pm = getServer().getPluginManager();
-	public static Config Food = null;
+	public static Config Inventory = null;
 
 	@Override
 	public void onEnable() {
 		// 準備
 		instance = this;
-		getLogger().info("HN-Coreを起動しました");
+		// config読み込み
 		try {
-			Food = new Config("food.yml", this);
+			Inventory = new Config("Inventory.yml", this);
 		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
-		// config読み込み
 		this.saveDefaultConfig();
 		// コマンドの設定
 		getCommand("hnget").setExecutor(new Get());
@@ -40,19 +39,24 @@ public class HNCore extends JavaPlugin {
 		getCommand("report").setExecutor(new report());
 		getCommand("hnlook").setExecutor(new look());
 		getCommand("home").setExecutor(new home());
-		getCommand("food").setExecutor(new AddFood());
-		getCommand("test").setExecutor(new test());
+		// getCommand("food").setExecutor(new AddFood());
+		getCommand("a").setExecutor(new AdminChat());
+		// getCommand("test").setExecutor(new test());
+
 		// Listener
 		pm.registerEvents(new Get(), this);
-		pm.registerEvents(new elevator(), this);
+		// pm.registerEvents(new elevator(), this); //
 		pm.registerEvents(new LoginMessage(), this);
 		pm.registerEvents(new ChangeMotd(), this);
 		pm.registerEvents(new freeze(), this);
-		pm.registerEvents(new Chat(), this);
+		// pm.registerEvents(new Chat(), this); //
 		pm.registerEvents(new ShowCommand(), this);
-		pm.registerEvents(new test(), this);
 		pm.registerEvents(new PocketItem(), this);
-		pm.registerEvents(new AddFood(), this);
+		// pm.registerEvents(new AddFood(), this);
+		pm.registerEvents(new AdminChat(), this);
+		pm.registerEvents(new Boat(), this);
+		pm.registerEvents(new SignView(), this);
+		pm.registerEvents(new test(), this);
 
 		ShapedRecipe workbench = new ShapedRecipe(Item.WorkBench()).shape(new String[] { "AW", "SA" })
 				.setIngredient('W', Material.WORKBENCH).setIngredient('S', Material.STICK);

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -56,8 +57,13 @@ public class look implements CommandExecutor {
 			sender.sendMessage("経験値: " + player1.getExpToLevel());
 			sender.sendMessage("体力: " + player1.getHealth() + "/" + player1.getMaxHealth());
 			sender.sendMessage("AllowFlight: " + player1.getAllowFlight());
-			sender.sendMessage("現在座標: " + player1.getLocation().toString());
-			sender.sendMessage("ホスト名: " + player1.getAddress().getHostName());
+			Location loc = player1.getLocation();
+			sender.sendMessage("現在座標: ");
+			sender.sendMessage("      X: " + loc.getX());
+			sender.sendMessage("      Y: " + loc.getY());
+			sender.sendMessage("      Z: " + loc.getZ());
+			sender.sendMessage("  Pitch: " + loc.getPitch());
+			sender.sendMessage("    Yaw: " + loc.getYaw());
 			sender.sendMessage("IPアドレス: " + player1.getAddress() + "(" + getLoc(player1.getAddress().toString()) + ")");
 		}
 		return true;
